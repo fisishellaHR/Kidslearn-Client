@@ -46,9 +46,17 @@ export default function Register() {
               <button className="py-4 bg-primary text-white rounded-[10px] w-full">
                 Daftar
               </button>
-              <Link to={"/login"} className="text-center">
-                Sudah punya akun? <b>Masuk</b>
-              </Link>
+              <div className="text-center">
+                <p className="text-base">
+                  Sudah Punya Akun?{" "}
+                  <Link
+                    to={"/login"}
+                    className="text-base font-bold text-primary"
+                  >
+                    Login
+                  </Link>
+                </p>
+              </div>
             </form>
           </div>
         </div>

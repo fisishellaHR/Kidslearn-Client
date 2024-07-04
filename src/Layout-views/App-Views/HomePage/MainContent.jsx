@@ -25,7 +25,7 @@ const MainContent = () => {
                 teknologi sejak dini sangat penting dalam era digital ini.
               </h2>
             </div>
-            <ButtonMain to={"/aboutuss"}>Baca selengkapnya</ButtonMain>
+            <ButtonMain to={"/aboutus"}>Baca selengkapnya</ButtonMain>
           </div>
         </motion.div>
         <motion.div

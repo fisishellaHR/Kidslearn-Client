@@ -1,5 +1,6 @@
 import fotosatu from "../../../assets/Landing-Views/SharingContent/fotosatu-Sharing.png";
 import fotodua from "../../../assets/Landing-Views/SharingContent/Fotodua-sharing.png";
+import { motion } from "framer-motion";
 
 export default function SharingSection() {
   return (
@@ -9,21 +10,33 @@ export default function SharingSection() {
           Apa Saja Yang Dipelajari?
         </h1>
         <div className="flex flex-col md:flex-row justify-between items-center gap-5 mb-[65px] ">
-          <div className="flex flex-col justify-center items-center bg-[#FFDBDC] rounded-3xl px-6 py-6 h-auto sm:h-[426px] w-full md:w-1/2">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-center items-center bg-[#FFDBDC] rounded-3xl px-6 py-6 h-auto sm:h-[426px] w-full md:w-1/2"
+          >
             <img
               src={fotosatu}
-              alt=""
+              alt="Foto Satu"
               className="w-full h-auto max-h-64 object-fill"
             />
             <h3 className="font-poppins text-[18px] sm:text-[20px] md:text-[24px] text-primary text-center mt-5">
               Quiz: Fitur quiz dirancang untuk membantu anak-anak menguji
               pemahaman mereka tentang materi yang telah dipelajari.
             </h3>
-          </div>
-          <div className="flex flex-col justify-center items-center bg-[#FFDBDC] rounded-3xl px-6 py-6 h-auto sm:h-[426px] w-full md:w-1/2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-center items-center bg-[#FFDBDC] rounded-3xl px-6 py-6 h-auto sm:h-[426px] w-full md:w-1/2"
+          >
             <img
               src={fotodua}
-              alt=""
+              alt="Foto Dua"
               className="w-full h-auto max-h-64 object-fill"
             />
             <h3 className="font-poppins text-[18px] sm:text-[20px] md:text-[24px] text-primary text-center mt-5">
@@ -31,7 +44,7 @@ export default function SharingSection() {
               terstruktur, mulai dari dasar-dasar HTML dan CSS hingga teknik
               lebih lanjut dalam pembuatan website statis.
             </h3>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

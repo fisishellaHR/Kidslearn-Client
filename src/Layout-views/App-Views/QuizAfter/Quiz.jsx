@@ -1,12 +1,12 @@
 import Footer from "../../../Components/layout-components/Footer";
 import NavbarAfter from "../../../Components/layout-components/NavbarAfter";
-import QuizContent from "./QuizContent";
+import QuizContentAfter from "./QuizContent";
 
-export default function Quiz() {
+export default function QuizAfter() {
   return (
     <div>
       <NavbarAfter />
-      <QuizContent />
+      <QuizContentAfter />
       <Footer />
     </div>
   );

@@ -1,9 +1,9 @@
 import Footer from "../../../Components/layout-components/Footer";
 import NavbarAfter from "../../../Components/layout-components/NavbarAfter";
 import HeroSection from "../HomePage/HeroSection";
-import SharingSection from "../HomePage/SharingSection";
 import { motion } from "framer-motion";
 import MainContentAfter from "./MainContentAfter";
+import SharingSectionAfter from "./SharingSection";
 
 export default function HomePageAfter() {
   return (
@@ -18,7 +18,7 @@ export default function HomePageAfter() {
         <HeroSection />
       </motion.div>
       <MainContentAfter />
-      <SharingSection />
+      <SharingSectionAfter />
       <Footer />
     </div>
   );

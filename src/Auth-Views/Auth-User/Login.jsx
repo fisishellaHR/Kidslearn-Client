@@ -31,23 +31,28 @@ export default function Login() {
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full border border-[#000000] p-4 rounded-[10px]"
+                className="w-full border border-[#000000] p-4 rounded-[10px] text-lg"
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full border border-[#000000] p-4 rounded-[10px]"
+                className="w-full border border-[#000000] p-4 rounded-[10px] text-lg"
               />
 
               <button
                 to={"/homepage"}
-                className="py-4 bg-primary text-white rounded-[10px] w-full"
+                className="py-4 bg-primary text-white rounded-[10px] w-full text-xl font-semibold"
               >
                 Masuk
               </button>
-              <Link to={"/register"} className="text-center">
-                Belum punya akun? <b>Daftar</b>
-              </Link>
+              <div className="flex justify-between items-center mt-2">
+                <Link to={"/register"} className="text-lg text-primary">
+                  Daftar Akun
+                </Link>
+                <Link to={"/resetpassword"} className="text-lg text-primary">
+                  Lupa Password ?
+                </Link>
+              </div>
             </form>
           </div>
         </div>

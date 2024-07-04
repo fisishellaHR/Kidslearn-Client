@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import materialslearn from "../../../assets/Landing-Views/LearningMaterials/Materi-LearningMaterial.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
+
 export default function MaterialsContent() {
   const [email, setEmail] = useState("");
   const [suggestion, setSuggestion] = useState("");
@@ -12,15 +14,49 @@ export default function MaterialsContent() {
     console.log("Email:", email);
     console.log("Saran:", suggestion);
   };
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.3 },
+    },
+    tap: {
+      scale: 0.95,
+      transition: { duration: 0.2 },
+    },
+  };
+
   return (
     <>
-      <div className="container">
-        <div className="flex flex-col ">
-          <img src={materialslearn} alt="" className="my-16" />
-          <div className="mb-16">
+      <motion.div
+        className="container"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <div className="flex flex-col">
+          <motion.img
+            src={materialslearn}
+            alt=""
+            className="my-16"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          />
+          <motion.div className="mb-16">
             <h1 className="text-[52px] font-bowlby text-black text-center">
               Apa Sih{" "}
-              <span className="text-primary font-bowlby ">Website Statis</span>{" "}
+              <span className="text-primary font-bowlby">Website Statis</span>{" "}
               Itu?
             </h1>
             <h2 className="text-center font-poppins text-[28px]">
@@ -31,32 +67,82 @@ export default function MaterialsContent() {
               pengguna mengunjungi halaman web statis, mereka melihat konten
               yang sama tanpa perubahan yang dinamis.
             </h2>
-          </div>
+          </motion.div>
           <div className="flex flex-col gap-y-3 mb-16">
-            <Link
-              to={"/materihtml"}
-              className="flex justify-between items-center bg-primary px-5 py-2 rounded-3xl gap-x-3"
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.2 }}
             >
-              <h1 className="font-bowlby text-[40px]">HTML</h1>
-              <IoIosArrowForward style={{ width: "60px", height: "28px" }} />
-            </Link>
-            <Link
-              to={"/matericss"}
-              className="flex justify-between items-center bg-primary px-5 py-2 rounded-3xl gap-x-3"
+              <motion.div
+                whileHover="hover"
+                whileTap="tap"
+                variants={buttonVariants}
+              >
+                <Link
+                  to={"/materihtml"}
+                  className="flex justify-between items-center bg-primary px-5 py-2 rounded-3xl gap-x-3"
+                >
+                  <h1 className="font-bowlby text-[40px]">HTML</h1>
+                  <IoIosArrowForward
+                    style={{ width: "60px", height: "28px" }}
+                  />
+                </Link>
+              </motion.div>
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.4 }}
             >
-              <h1 className="font-bowlby text-[40px]">CSS</h1>
-              <IoIosArrowForward style={{ width: "60px", height: "28px" }} />
-            </Link>
-            <Link
-              to={"/"}
-              className="flex justify-between items-center bg-primary px-5 py-2 rounded-3xl gap-x-3"
+              <motion.div
+                whileHover="hover"
+                whileTap="tap"
+                variants={buttonVariants}
+              >
+                <Link
+                  to={"/matericss"}
+                  className="flex justify-between items-center bg-primary px-5 py-2 rounded-3xl gap-x-3"
+                >
+                  <h1 className="font-bowlby text-[40px]">CSS</h1>
+                  <IoIosArrowForward
+                    style={{ width: "60px", height: "28px" }}
+                  />
+                </Link>
+              </motion.div>
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.6 }}
             >
-              <h1 className="font-bowlby text-[40px]">SUMBER</h1>
-              <IoIosArrowForward style={{ width: "60px", height: "28px" }} />
-            </Link>
+              <motion.div
+                whileHover="hover"
+                whileTap="tap"
+                variants={buttonVariants}
+              >
+                <Link
+                  to={"/"}
+                  className="flex justify-between items-center bg-primary px-5 py-2 rounded-3xl gap-x-3"
+                >
+                  <h1 className="font-bowlby text-[40px]">SUMBER</h1>
+                  <IoIosArrowForward
+                    style={{ width: "60px", height: "28px" }}
+                  />
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-        <div className="container mx-auto p-8">
+        <motion.div
+          className="container mx-auto p-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
           <h1 className="text-3xl font-bold mb-6">Form Kesan dan Pesan</h1>
           <form
             onSubmit={handleSubmit}
@@ -95,16 +181,18 @@ export default function MaterialsContent() {
               ></textarea>
             </div>
             <div className="flex items-center justify-between">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="bg-primary hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Kirim
-              </button>
+              </motion.button>
             </div>
           </form>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { motion } from "framer-motion";
 import headinghcss from "../../../assets/Landing-Views/CSSPage/Heading-PageCSS.png";
 
 const dataCss = [
@@ -52,6 +53,16 @@ const dataCss = [
   },
 ];
 
+const itemVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: { opacity: 1, height: "auto", transition: { duration: 0.5 } },
+};
+
+const arrowVariants = {
+  collapsed: { rotate: 0 },
+  expanded: { rotate: 90 },
+};
+
 export default function CssContent() {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
@@ -62,17 +73,35 @@ export default function CssContent() {
   return (
     <div className="container">
       <div className="flex flex-col">
-        <img src={headinghcss} alt="" className="my-16" />
+        <motion.img
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          src={headinghcss}
+          alt=""
+          className="my-16"
+        />
         <div className="mb-16">
-          <h1 className="text-[52px] font-bowlby text-black text-center">
-            Apa Sih <span className="text-primary font-bowlby">CSS </span> Itu?
-          </h1>
-          <h2 className="text-center font-poppins text-[28px]">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-[52px] font-bowlby text-black text-center"
+          >
+            Apa Sih <span className="text-primary font-bowlby">CSS</span> itu?
+          </motion.h1>
+
+          <motion.h2
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            className="text-center font-poppins text-[28px]"
+          >
             CSS (Cascading Style Sheets) adalah bahasa yang digunakan untuk
             mendesain dan mengatur tampilan halaman web. Saat mempelajari CSS
             untuk membuat website statis, beberapa konsep dan teknik utama yang
             akan dipelajari meliputi:
-          </h2>
+          </motion.h2>
         </div>
         <div className="flex flex-col gap-y-3 mb-16">
           {dataCss.map((item) => (
@@ -82,13 +111,29 @@ export default function CssContent() {
                 onClick={() => handleToggleDropdown(item.id)}
               >
                 <h1 className="font-bowlby text-[40px]">{item.title}</h1>
-                <IoIosArrowForward style={{ width: "60px", height: "28px" }} />
+                <motion.div
+                  variants={arrowVariants}
+                  initial="collapsed"
+                  animate={
+                    openDropdownId === item.id ? "expanded" : "collapsed"
+                  }
+                  style={{ originY: 0.55 }}
+                >
+                  <IoIosArrowForward
+                    style={{ width: "60px", height: "28px" }}
+                  />
+                </motion.div>
               </div>
-              {openDropdownId === item.id &&
-                (item.src ? (
+              <motion.div
+                variants={itemVariants}
+                initial="hidden"
+                animate={openDropdownId === item.id ? "visible" : "hidden"}
+                className="overflow-hidden"
+              >
+                {item.src ? (
                   <div className="px-5 py-2 bg-primary rounded-3xl mt-3">
                     <div className="relative w-full overflow-hidden pb-[56.25%] h-[550px] group">
-                      <iframe
+                      <motion.iframe
                         src={item.src}
                         title="YouTube video player"
                         frameBorder="0"
@@ -96,7 +141,7 @@ export default function CssContent() {
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                         className="absolute top-4 bottom-8 left-0 w-full h-full rounded-3xl border-8 border-white transition-transform duration-500 ease-in-out transform group-hover:-translate-y-2"
-                      ></iframe>
+                      ></motion.iframe>
                     </div>
                     <div className="bg-white text-primary font-poppins text-2xl text-justify py-3 my-7 rounded-lg px-3">
                       <h2>{item.desc}</h2>
@@ -109,7 +154,8 @@ export default function CssContent() {
                       <p>Content untuk item ini.</p>
                     </div>
                   </div>
-                ))}
+                )}
+              </motion.div>
             </div>
           ))}
         </div>

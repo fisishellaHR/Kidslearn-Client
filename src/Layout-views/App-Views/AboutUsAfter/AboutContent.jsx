@@ -1,20 +1,36 @@
 import headingabout from "../../../assets/Landing-Views/AboutUs/Heading-AboutUs.png";
 import imageabout from "../../../assets/Landing-Views/AboutUs/ImageContent-AboutUs.png";
+import { motion } from "framer-motion";
 
-export default function AboutContent() {
+export default function AboutContentAfter() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6 } },
+  };
+
   return (
     <>
-      <div className="container flex flex-col gap-y-16">
-        <div className="my-16">
+      <motion.div
+        className="container flex flex-col gap-y-16"
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+      >
+        <motion.div className="my-16" variants={fadeInUp}>
           <img src={headingabout} alt="" />
-        </div>
-        <div>
+        </motion.div>
+        <motion.div variants={fadeInUp}>
           <img src={imageabout} alt="" className="mx-auto" />
-        </div>
-        <div className="text-center">
+        </motion.div>
+        <motion.div className="text-center" variants={fadeInUp}>
           <h1 className=" font-bowlby text-[64px]">KidsLearn</h1>
-        </div>
-        <div className="text-center mb-16">
+        </motion.div>
+        <motion.div className="text-center mb-16" variants={fadeInUp}>
           <p className="text-2xl font-poppins px-10 ">
             Selamat datang di KidsLearn, platform e-learning yang dirancang
             khusus untuk membantu anak-anak sekolah dasar dalam memanfaatkan
@@ -34,8 +50,8 @@ export default function AboutContent() {
             KidsLearn dan mulailah petualangan belajar yang akan membuka pintu
             menuju masa depan yang penuh inovasi dan peluang!
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

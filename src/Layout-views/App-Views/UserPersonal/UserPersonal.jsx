@@ -1,5 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const UserPersonal = () => {
   return (
@@ -12,9 +13,15 @@ const UserPersonal = () => {
           <FaArrowLeft className="text-4xl" />
           <h1 className="font-poppins ">Back To HomePage</h1>
         </Link>
-        <Link className="flex justify-start items-center mb-12  text-white bg-primary hover:bg-secondary rounded-xl   hover:text-white py-2 px-2">
-          Logout
-        </Link>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          <Link className="flex justify-start items-center mb-12  text-white bg-primary hover:bg-secondary rounded-xl   hover:text-white py-2 px-2">
+            Logout
+          </Link>
+        </motion.button>
       </div>
       <div className=" mx-auto bg-white p-8 rounded-md shadow-md">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
@@ -43,12 +50,18 @@ const UserPersonal = () => {
               className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
-          <button
-            type="submit"
-            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark"
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Simpan Perubahan
-          </button>
+            <button
+              type="submit"
+              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark"
+            >
+              Simpan Perubahan
+            </button>
+          </motion.button>
         </form>
       </div>
     </section>

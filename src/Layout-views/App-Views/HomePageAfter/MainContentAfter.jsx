@@ -26,7 +26,7 @@ const MainContentAfter = () => {
                 teknologi sejak dini sangat penting dalam era digital ini.
               </h2>
             </div>
-            <ButtonMain to={"/aboutussafter"}>Baca selengkapnya</ButtonMain>
+            <ButtonMain to={"/aboutusafter"}>Baca selengkapnya</ButtonMain>
           </div>
         </motion.div>
         <motion.div

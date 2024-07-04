@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const questions = [
   {
@@ -137,20 +138,32 @@ const QuestionOne = () => {
           </p>
           <p className="text-xl mb-8">Score: {score}</p>
           <div className="flex justify-center flex-wrap">
-            <Link
-              to="/quiz"
-              id="quiz-page"
-              className="bg-white text-black font-semibold px-4 py-2 rounded-lg mb-2 mx-2 hover:bg-black hover:text-white transition duration-300  "
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Back To Quiz-Page
-            </Link>
-            <Link
-              to="/homepage"
-              id="home-page"
-              className="text-white font-semibold bg-secondary rounded-lg px-4 py-2 mb-2 mx-2 hover:bg-black hover:text-white transition duration-300"
+              <Link
+                to="/quizafter"
+                id="quiz-page"
+                className="bg-white text-black font-semibold px-4 py-2 rounded-lg mb-2 mx-2 hover:bg-black hover:text-white transition duration-300  "
+              >
+                Back To Quiz-Page
+              </Link>
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Back To <i>KidsLearn</i>
-            </Link>
+              <Link
+                to="/homepageafter"
+                id="home-page"
+                className="text-white font-semibold bg-secondary rounded-lg px-4 py-2 mb-2 mx-2 hover:bg-black hover:text-white transition duration-300"
+              >
+                Back To <i>KidsLearn</i>
+              </Link>
+            </motion.button>
           </div>
         </div>
       </div>
