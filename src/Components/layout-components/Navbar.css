@@ -1,0 +1,38 @@
+/* Header styles */
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white; /* Adjust as needed */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Hamburger button styles */
+.hamburger-line {
+  display: block;
+  width: 25px;
+  height: 2px;
+  margin: 5px auto;
+  background-color: #333;
+}
+
+/* Active state for hamburger button */
+.hamburger-active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg);
+  transform-origin: 5% 5%;
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg);
+  transform-origin: 5% 95%;
+}
+
+/* Hidden state for nav menu */
+.hidden {
+  display: none;
+}
