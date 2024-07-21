@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const questions = [
   {
@@ -80,6 +81,25 @@ const QuestionTwo = () => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [showResult, setShowResult] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+  const percobaan = 0;
+  const judul = "CSS ";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(" http://localhost:3000/auth/submitresult", {
+        email: localStorage.getItem("email"),
+        judul: judul,
+        percobaan: percobaan,
+        score: score,
+      });
+      setSubmitted(true);
+      alert("Jawaban Anda telah dikirim");
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -152,6 +172,16 @@ const QuestionTwo = () => {
                 Back To Quiz-Page
               </Link>
             </motion.button>
+            {!submitted && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleSubmit}
+                className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-black"
+              >
+                Submit <i>Result</i>
+              </motion.button>
+            )}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

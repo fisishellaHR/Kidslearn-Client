@@ -1,34 +1,23 @@
 /* eslint-disable no-undef */
 import { FeedBack } from "../FeedBack/FeedBack";
 import { FormMateri } from "../FromMateri/FormMateri";
-import ContentKidsLearn from "../KidsLearn/ContentKidsLearn";
+import ContentKidsLearn from "../../../../src/Layout-views/Admin-Views/KidsLearn/ContentKidsLearn";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
+import axios from "axios";
+import NilaiPengguna from "../NilaiPengguna/NilaiPengguna";
+import DataPengguna from "../DataPengguna/DataPengguna";
+import ViewModule from "../ViewModule/ViewModule";
 
 export default function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState("KidsLearn");
+  axios.defaults.withCredentials = true;
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
-  // Example feedback data
-  const feedback = [
-    { id: 1, user: "Hegi", masukan: "Bagus Banget kaka Websitenya" },
-    {
-      id: 2,
-      user: "Irham",
-      masukan:
-        "Needs more content. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, tenetur minus vero iure numquam doloremque sequi quam eveniet quas natus cumque itaque dicta voluptas, aut velit possimus quae non dolor!",
-    },
-    {
-      id: 3,
-      user: "Fanny",
-      masukan: "sangat sangat bagus jadi ingin terus menggunakan",
-    },
-  ];
 
   const renderContent = () => {
     switch (activePage) {
@@ -37,9 +26,13 @@ export default function Dashboard() {
       case "MateriPengguna":
         return <FormMateri />;
       case "NilaiPengguna":
-        return <div>Content for Nilai Pengguna</div>;
+        return <NilaiPengguna />;
       case "MasukanWebsite":
-        return <FeedBack feedback={feedback} />;
+        return <FeedBack />;
+      case "DataPengguna":
+        return <DataPengguna />;
+      case "ViewModule":
+        return <ViewModule />;
       default:
         return <div>Select a page</div>;
     }

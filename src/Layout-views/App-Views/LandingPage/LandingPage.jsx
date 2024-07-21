@@ -5,15 +5,15 @@ import MainContent from "./MainContent";
 import SharingSection from "./SharingSection";
 import { motion } from "framer-motion";
 
-export default function HomePageBefore() {
+export default function LandingPage() {
   return (
     <div>
       <NavbarBefore />
       <motion.div
-        initial={{ opacity: 0, x: -50 }} // Start 50px to the left and with 0 opacity
-        whileInView={{ opacity: 1, x: 0 }} // Move to the original position and full opacity
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9 }}
-        viewport={{ once: true }} // Ensure the animation happens only once
+        viewport={{ once: true }}
       >
         <HeroSection />
       </motion.div>

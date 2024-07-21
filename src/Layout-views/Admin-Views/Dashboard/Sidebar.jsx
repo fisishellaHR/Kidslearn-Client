@@ -1,11 +1,8 @@
 /* eslint-disable react/prop-types */
-import {
-  FiArrowLeft,
-  FiAirplay,
-  FiShoppingBag,
-  FiClock,
-  FiGift,
-} from "react-icons/fi";
+import { FaUsers, FaWpforms } from "react-icons/fa";
+import { FiArrowLeft, FiAirplay, FiGift } from "react-icons/fi";
+import { GrScorecard } from "react-icons/gr";
+import { VscFileSubmodule } from "react-icons/vsc";
 
 export default function Sidebar({ setmenu, menu, setActivePage }) {
   return (
@@ -38,11 +35,21 @@ export default function Sidebar({ setmenu, menu, setActivePage }) {
               </li>
               <li>
                 <button
+                  onClick={() => setActivePage("DataPengguna")}
+                  className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
+                >
+                  <FaUsers className="text-lg lg:text-2xl" />
+
+                  <span>Data User</span>
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => setActivePage("MateriPengguna")}
                   className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
                 >
-                  <FiShoppingBag className="text-lg lg:text-2xl" />
-                  <span>Materi Pengguna</span>
+                  <FaWpforms className="text-lg lg:text-2xl" />
+                  <span>Add Module</span>
                 </button>
               </li>
               <li>
@@ -50,7 +57,7 @@ export default function Sidebar({ setmenu, menu, setActivePage }) {
                   onClick={() => setActivePage("NilaiPengguna")}
                   className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
                 >
-                  <FiClock className="text-lg lg:text-2xl" />
+                  <GrScorecard className="text-lg lg:text-2xl" />
                   <span>Nilai Pengguna</span>
                 </button>
               </li>
@@ -60,7 +67,17 @@ export default function Sidebar({ setmenu, menu, setActivePage }) {
                   className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
                 >
                   <FiGift className="text-lg lg:text-2xl" />
-                  <span>Masukan Website</span>
+                  <span>Users FeedBack</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => setActivePage("ViewModule")}
+                  className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
+                >
+                  <VscFileSubmodule className="text-lg lg:text-2xl" />
+
+                  <span>View Module</span>
                 </button>
               </li>
             </ul>

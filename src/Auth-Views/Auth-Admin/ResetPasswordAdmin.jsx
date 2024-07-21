@@ -1,63 +1,52 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import authuserimage from "../../../public/Auth-Views/Auth-User/Image-AuthUser.png";
 import { FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 
-export default function LoginAdmin() {
-  const [email, setEmail] = useState("");
+export default function ResetPasswordAdmin() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const { token } = useParams();
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true;
-
-  const validate = () => {
+  const validateForm = () => {
     const newErrors = {};
-    if (!email) newErrors.email = "Email tidak boleh kosong";
-    if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email tidak valid";
-    if (!password) newErrors.password = "Password tidak boleh kosong";
+    if (password.length < 6) {
+      newErrors.password = "Password minimal 6 karakter";
+    }
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
       return;
     }
-    setErrors({});
-
     try {
       const response = await axios.post(
-        "http://localhost:3000/admin/loginadmin",
+        "http://localhost:3000/admin/reset-passwordadmin",
         {
-          email: email,
-          password: password,
+          password,
+          token,
         }
       );
-
-      if (response.data.status) {
-        const username = jwtDecode(response.data.token);
-        localStorage.setItem("username", username.username);
-        alert("Berhasil Login!");
-        navigate("/dashboardadmin");
-      }
+      console.log(response);
+      alert("Password berhasil diubah!");
+      setTimeout(() => {
+        navigate("/loginadmin");
+      }, 2000);
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        alert(error.response.data.message);
-      } else {
-        alert("Terjadi kesalahan saat login");
-      }
-      console.error("Login error:", error);
+      console.error(error);
+      alert("Gagal mengubah password");
     }
   };
 
   return (
     <section className="flex items-center justify-center min-h-screen py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-7 flex flex-col items-center md:items-start">
             <h1 className="font-bowlby text-6xl md:text-8xl text-primary mb-4 mx-auto">
@@ -71,41 +60,46 @@ export default function LoginAdmin() {
           </div>
 
           <div className="col-span-12 md:col-span-5 flex flex-col items-center md:items-start">
-            <Link to={"/"} className="self-start mb-4">
+            <Link to={"/loginadmin"} className="self-start mb-4">
               <FaArrowLeft className="text-4xl" />
             </Link>
             <h2 className="font-semibold text-2xl md:text-3xl mb-4">
-              Masuk Akun{" "}
+              New Password{" "}
               <span className="text-primary font-bowlby "> Admin</span>
             </h2>
             <form
-              className="flex flex-col gap-y-4 w-full"
               onSubmit={handleSubmit}
+              className="flex flex-col gap-y-4 w-full"
             >
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full border border-[#000000] p-4 rounded-[10px]"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {errors.email && <p className="text-red-500">{errors.email}</p>}
+              <label htmlFor="password">
+                <p className="text-base font-bold">Password</p>
+              </label>
               <input
                 type="password"
                 placeholder="Password"
                 className="w-full border border-[#000000] p-4 rounded-[10px]"
-                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               {errors.password && (
-                <p className="text-red-500">{errors.password}</p>
+                <p className="text-red-500 text-sm">{errors.password}</p>
               )}
               <button
                 type="submit"
-                className="py-4 bg-primary text-white rounded-[10px] w-full"
+                className="w-full bg-primary py-4 px-6 rounded-[10px] text-white text-xl font-semibold"
               >
-                Masuk
+                Ubah Password
               </button>
+              <div className="text-center">
+                <p className="text-base">
+                  Ingat password?{" "}
+                  <Link
+                    to="/loginadmin"
+                    className="text-base font-bold text-primary"
+                  >
+                    Login
+                  </Link>
+                </p>
+              </div>
             </form>
           </div>
         </div>

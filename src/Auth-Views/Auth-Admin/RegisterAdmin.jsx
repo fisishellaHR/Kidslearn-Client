@@ -4,7 +4,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Register() {
+const RegisterAdmin = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,21 +32,25 @@ export default function Register() {
     setErrors({});
 
     try {
-      const response = await axios.post("http://localhost:3000/auth/register", {
-        username,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/admin/registeradmin",
+        {
+          username,
+          email,
+          password,
+        }
+      );
 
       if (response.data.status) {
+        console.log(response.data.status);
         alert("Registrasi berhasil!");
-        navigate("/login");
+        navigate("/loginadmin");
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
         alert(error.response.data.message);
       } else {
-        alert("An error occurred during registration");
+        alert("Terjadi kesalahan saat registrasi");
       }
       console.error("Registration error:", error);
     }
@@ -68,11 +72,12 @@ export default function Register() {
           </div>
 
           <div className="col-span-12 md:col-span-5 flex flex-col items-center md:items-start">
-            <Link to={"/login"} className="self-start mb-4">
+            <Link to={"/loginadmin"} className="self-start mb-4">
               <FaArrowLeft className="text-4xl" />
             </Link>
             <h2 className="font-semibold text-2xl md:text-3xl mb-4">
-              Daftar Akun
+              Daftar Akun{" "}
+              <span className="text-primary font-bowlby "> Admin</span>
             </h2>
             <form
               className="sign-up-form flex flex-col gap-y-4 w-full"
@@ -123,7 +128,7 @@ export default function Register() {
                 <p className="text-base">
                   Sudah Punya Akun?{" "}
                   <Link
-                    to={"/login"}
+                    to={"/loginadmin"}
                     className="text-base font-bold text-primary"
                   >
                     Login
@@ -136,4 +141,6 @@ export default function Register() {
       </div>
     </section>
   );
-}
+};
+
+export default RegisterAdmin;

@@ -1,19 +1,20 @@
-import Footer from "../../../Components/layout-components/Footer";
-import NavbarAfter from "../../../Components/layout-components/NavbarAfter";
-import HeroSection from "../HomePage/HeroSection";
 import { motion } from "framer-motion";
+import axios from "axios";
+import NavbarAfter from "../../../Components/layout-components/NavbarAfter";
+import HeroSection from "../LandingPage/HeroSection";
+import Footer from "../../../Components/layout-components/Footer";
+import SharingSectionAfter from "./SharingSectionAfter";
 import MainContentAfter from "./MainContentAfter";
-import SharingSectionAfter from "./SharingSection";
-
 export default function HomePageAfter() {
+  axios.defaults.withCredentials = true;
   return (
     <div>
       <NavbarAfter />
       <motion.div
-        initial={{ opacity: 0, x: -50 }} // Start 50px to the left and with 0 opacity
-        whileInView={{ opacity: 1, x: 0 }} // Move to the original position and full opacity
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9 }}
-        viewport={{ once: true }} // Ensure the animation happens only once
+        viewport={{ once: true }}
       >
         <HeroSection />
       </motion.div>

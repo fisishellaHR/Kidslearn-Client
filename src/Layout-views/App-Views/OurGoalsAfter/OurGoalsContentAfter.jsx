@@ -1,5 +1,5 @@
-import ourheading from "../../../assets/Landing-Views/OurGoals/Heading-OurGols.png";
-import imageourcontent from "../../../assets/Landing-Views/OurGoals/ImageContent-OurGoals.png";
+import ourheading from "../../../../public/Landing-Views/OurGoals/Heading-OurGols.png";
+import imageourcontent from "../../../../public/Landing-Views/OurGoals/ImageContent-OurGoals.png";
 import { motion } from "framer-motion";
 
 export default function OurGoalsContentAfter() {

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import ButtonQuiz from "../../../Components/shared-components/ButtonQuiz";
-import cardquiz from "../../../assets/Landing-Views/Quiz/ImageCardSatu-Quiz.png";
-import quizheading from "../../../assets/Landing-Views/Quiz/ImageHeading-Quiz.png";
+import cardquiz from "../../../../public/Landing-Views/Quiz/ImageCardSatu-Quiz.png";
+import quizheading from "../../../../public/Landing-Views/Quiz/ImageHeading-Quiz.png";
 
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -58,7 +58,7 @@ export default function QuizContentAfter() {
             pengetahuan dasar kamu nih, HTML lebih lanjut!
           </motion.p>
           <motion.div variants={itemVariants}>
-            <ButtonQuiz to="/quissatu">Mulai Quiz</ButtonQuiz>
+            <ButtonQuiz to="/quizsatu">Mulai Quiz</ButtonQuiz>
           </motion.div>
         </motion.div>
 
@@ -90,7 +90,7 @@ export default function QuizContentAfter() {
             pengetahuan dasar kamu nih, CSS lebih lanjut!
           </motion.p>
           <motion.div variants={itemVariants}>
-            <ButtonQuiz to="/quisdua">Mulai Quiz</ButtonQuiz>
+            <ButtonQuiz to="/quizdua">Mulai Quiz</ButtonQuiz>
           </motion.div>
         </motion.div>
       </motion.div>

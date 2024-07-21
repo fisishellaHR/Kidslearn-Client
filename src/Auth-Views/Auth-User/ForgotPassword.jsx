@@ -1,47 +1,35 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authuserimage from "../../../public/Auth-Views/Auth-User/Image-AuthUser.png";
 import { FaArrowLeft } from "react-icons/fa";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 
-export default function ResetPassword() {
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const { token } = useParams();
+export default function ForgotPassword() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (password.length < 6) {
-      newErrors.password = "Password minimal 6 karakter";
-    }
-    return newErrors;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-      return;
-    }
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/reset-password",
-        {
-          password,
-          token,
+  const onSubmit = (data) => {
+    axios
+      .post("http://localhost:3000/auth/forgot-password", data)
+      .then((response) => {
+        if (response.data.status) {
+          alert("Check your email to reset your password link");
+          window.open("https://mail.google.com/", "_blank");
+          setTimeout(() => {
+            navigate("/login");
+          }, 5000);
+        } else {
+          alert(response.data.message || "Error sending email");
         }
-      );
-      console.log(response);
-      alert("Password berhasil diubah!");
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-    } catch (error) {
-      console.error(error);
-      alert("Gagal mengubah password");
-    }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Terjadi kesalahan, coba lagi nanti");
+      });
   };
 
   return (
@@ -58,35 +46,31 @@ export default function ResetPassword() {
               className="max-w-full"
             />
           </div>
-
           <div className="col-span-12 md:col-span-5 flex flex-col items-center md:items-start">
             <Link to={"/login"} className="self-start mb-4">
               <FaArrowLeft className="text-4xl" />
             </Link>
             <h2 className="font-semibold text-2xl md:text-3xl mb-4">
-              New Password
+              Lupa Password
             </h2>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-y-4 w-full"
             >
-              <label htmlFor="password">
-                <p className="text-base font-bold">Password</p>
-              </label>
               <input
-                type="password"
-                placeholder="Password"
-                className="w-full border border-[#000000] p-4 rounded-[10px]"
-                onChange={(e) => setPassword(e.target.value)}
+                type="email"
+                placeholder="Email"
+                className="w-full border border-[#000000] p-4 rounded-[10px] text-lg"
+                {...register("email", { required: true })}
               />
-              {errors.password && (
-                <p className="text-red-500 text-sm">{errors.password}</p>
+              {errors.email && (
+                <span className="text-red-500">Email tidak valid</span>
               )}
               <button
                 type="submit"
                 className="w-full bg-primary py-4 px-6 rounded-[10px] text-white text-xl font-semibold"
               >
-                Ubah Password
+                Send Email
               </button>
               <div className="text-center">
                 <p className="text-base">

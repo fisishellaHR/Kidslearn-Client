@@ -1,4 +1,4 @@
-import herosectionfoto from "../../../assets/Landing-Views/HeroSection/FotoHero-Homepage.png";
+import herosectionfoto from "../../../../public/Landing-Views/HeroSection/FotoHero-Homepage.png";
 
 export const HeroSection = () => {
   return (

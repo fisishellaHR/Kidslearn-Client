@@ -1,5 +1,4 @@
-import imageabout from "../../../assets/Landing-Views/AboutUs/ImageContent-AboutUs.png";
-
+import imageabout from "../../../../public/Landing-Views/AboutUs/ImageContent-AboutUs.png";
 export default function ContentKidsLearn() {
   return (
     <>

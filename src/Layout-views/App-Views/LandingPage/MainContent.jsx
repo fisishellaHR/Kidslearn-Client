@@ -1,5 +1,5 @@
-import contentsatu from "../../../assets/Landing-Views/MainContent/ContentSatu-MainContent.png";
-import contentdua from "../../../assets/Landing-Views/MainContent/ContentDua-MainContent.png";
+import contentsatu from "../../../../public/Landing-Views/MainContent/ContentSatu-MainContent.png";
+import contentdua from "../../../../public/Landing-Views/MainContent/ContentDua-MainContent.png";
 import ButtonMain from "../../../Components/shared-components/ButtonMain";
 import { motion } from "framer-motion";
 const MainContent = () => {
@@ -7,10 +7,10 @@ const MainContent = () => {
     <>
       <div className="container mt-[200px] flex flex-col gap-y-16">
         <motion.div
-          initial={{ opacity: 0, y: 50 }} // Start 50px below and with 0 opacity
-          whileInView={{ opacity: 1, y: -2 }} // Move to the original position and full opacity
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: -2 }}
           transition={{ duration: 0.9 }}
-          viewport={{ once: true }} // Ensure the animation happens only once
+          viewport={{ once: true }}
         >
           <div className="flex flex-col justify-center items-center gap-y-16 bg-primary h-auto rounded-3xl">
             <div className="flex flex-col justify-center items-center">
@@ -29,10 +29,10 @@ const MainContent = () => {
           </div>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 50 }} // Start 50px below and with 0 opacity
-          whileInView={{ opacity: 1, y: -2 }} // Move to the original position and full opacity
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: -2 }}
           transition={{ duration: 0.9 }}
-          viewport={{ once: true }} // Ensure the animation happens only once
+          viewport={{ once: true }}
         >
           <div className="flex flex-col justify-center items-center gap-y-16 bg-primary h-auto rounded-3xl">
             <div className="flex flex-col justify-center items-center">

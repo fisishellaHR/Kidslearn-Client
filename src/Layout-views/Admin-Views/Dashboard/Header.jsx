@@ -1,8 +1,35 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.get("http://localhost:3000/admin/logoutadmin");
+      alert("Berhasil Logout!");
+      localStorage.removeItem("username");
+      setTimeout(() => {
+        navigate("/loginadmin");
+      }, 2000);
+    } catch (error) {
+      alert("Terjadi kesalahan saat logout");
+      console.error(error);
+    }
+  };
+  axios.defaults.withCredentials = true;
+
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    setUsername(storedUsername);
+  }, []);
+
   return (
     <header className="sticky top-0 flex w-full bg-primary z-[999] border-b-2 border-secondary">
       <div className="flex items-center justify-end flex-grow px-4 py-4 shadow md:px-6 2xl:px-11">
@@ -14,15 +41,15 @@ export default function Header() {
                   Hallo Bang
                 </span>
                 <span className="block text-xs text-secondary font-bowlby">
-                  Fisiii
+                  {username}
                 </span>
               </span>
-              <Link
-                href=""
+              <button
+                onClick={handleLogout}
                 className="bg-black px-2 py-2 rounded-2xl text-white font-bold text-sm hover:bg-white hover:text-black"
               >
                 LOGOUT
-              </Link>
+              </button>
             </div>
           </div>
         </div>

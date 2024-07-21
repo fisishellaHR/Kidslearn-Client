@@ -1,5 +1,5 @@
-import headingabout from "../../../assets/Landing-Views/AboutUs/Heading-AboutUs.png";
-import imageabout from "../../../assets/Landing-Views/AboutUs/ImageContent-AboutUs.png";
+import headingabout from "../../../../public/Landing-Views/AboutUs/Heading-AboutUs.png";
+import imageabout from "../../../../public/Landing-Views/AboutUs/ImageContent-AboutUs.png";
 import { motion } from "framer-motion";
 
 export default function AboutContent() {

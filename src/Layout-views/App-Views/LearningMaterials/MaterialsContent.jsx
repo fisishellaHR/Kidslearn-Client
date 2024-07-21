@@ -1,18 +1,45 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import materialslearn from "../../../assets/Landing-Views/LearningMaterials/Materi-LearningMaterial.png";
+import materialslearn from "../../../../public/Landing-Views/LearningMaterials/Materi-LearningMaterial.png";
 import { IoIosArrowForward } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function MaterialsContent() {
   const [email, setEmail] = useState("");
   const [suggestion, setSuggestion] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    setEmail(email);
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logika pengiriman data kesan dan pesan
-    console.log("Email:", email);
-    console.log("Saran:", suggestion);
+
+    // Validasi input
+    if (suggestion.trim() === "") {
+      setError("Saran tidak boleh kosong.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/auth/addsuggestion",
+        {
+          email: email,
+          suggestion: suggestion,
+        }
+      );
+      alert("Suggestion submitted successfully");
+      console.log(response);
+      setSuggestion("");
+      setError("");
+    } catch (error) {
+      console.log(error);
+      alert("Terjadi kesalahan saat mengirim saran.");
+    }
   };
 
   const containerVariants = {
@@ -145,25 +172,9 @@ export default function MaterialsContent() {
         >
           <h1 className="text-3xl font-bold mb-6">Form Kesan dan Pesan</h1>
           <form
-            onSubmit={handleSubmit}
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            onSubmit={handleSubmit}
           >
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Email:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -174,12 +185,15 @@ export default function MaterialsContent() {
               <textarea
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="suggestion"
+                name="suggestion"
                 rows="4"
+                maxLength={250}
                 value={suggestion}
                 onChange={(e) => setSuggestion(e.target.value)}
-                required
               ></textarea>
+              {error && <p className="text-red-500 text-xs italic">{error}</p>}
             </div>
+
             <div className="flex items-center justify-between">
               <motion.button
                 whileHover={{ scale: 1.05 }}

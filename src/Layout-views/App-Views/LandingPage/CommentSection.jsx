@@ -1,5 +1,5 @@
-import cewecomment from "../../assets/Landing-Views/CommentSection/Cewe-CommentSection.png";
-import cowocomment from "../../assets/Landing-Views/CommentSection/Cowo-CommentSection.png";
+import cewecomment from "../../../../public/Landing-Views/CommentSection/Cewe-CommentSection.png";
+import cowocomment from "../../../../public/Landing-Views/CommentSection/Cowo-CommentSection.png";
 
 export default function CommentSection() {
   return (

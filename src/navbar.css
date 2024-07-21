@@ -1,0 +1,28 @@
+/* navbar.css */
+
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; /* Ensure it's above other elements */
+}
+
+.hamburger-active .hamburger-line {
+  background-color: red; /* Example: Change color when active */
+}
+
+/* Example styles for the hamburger lines */
+.hamburger-line {
+  display: block;
+  width: 25px;
+  height: 2px;
+  margin: 4px auto;
+  background-color: black;
+  transition: all 0.3s ease;
+}
+
+/* Additional CSS for responsive navbar */
+#nav-menu.hidden {
+  display: none;
+}

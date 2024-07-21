@@ -1,8 +1,8 @@
-import fotosatu from "../../../assets/Landing-Views/SharingContent/fotosatu-Sharing.png";
-import fotodua from "../../../assets/Landing-Views/SharingContent/Fotodua-sharing.png";
+import fotosatu from "../../../../public/Landing-Views/SharingContent/fotosatu-Sharing.png";
+import fotodua from "../../../../public/Landing-Views/SharingContent/Fotodua-sharing.png";
 import { motion } from "framer-motion";
 
-export default function SharingSection() {
+export default function SharingSectionAfter() {
   return (
     <>
       <div className="container mx-auto px-4 mt-[65px]">
