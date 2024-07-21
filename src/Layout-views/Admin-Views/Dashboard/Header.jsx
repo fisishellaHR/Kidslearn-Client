@@ -10,7 +10,9 @@ export default function Header() {
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
-      await axios.get("http://localhost:3000/admin/logoutadmin");
+      await axios.get(
+        "https://kidslearn-client.vercel.app/api/admin/logoutadmin"
+      );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");
       setTimeout(() => {
