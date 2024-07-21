@@ -15,6 +15,7 @@ export default function Header() {
       );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");
+      localStorage.removeItem("email");
       setTimeout(() => {
         navigate("/loginadmin");
       }, 2000);
