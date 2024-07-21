@@ -89,12 +89,15 @@ const QuestionOne = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:3000/auth/submitresult", {
-        email: localStorage.getItem("email"),
-        judul: "HTML ",
-        percobaan: 0,
-        score: score,
-      });
+      await axios.post(
+        "https://kidslearn-server.vercel.app/api/auth/submitresult",
+        {
+          email: localStorage.getItem("email"),
+          judul: "HTML ",
+          percobaan: 0,
+          score: score,
+        }
+      );
       setSubmitted(true);
       alert("Jawaban Anda telah dikirim");
     } catch (error) {

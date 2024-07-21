@@ -22,7 +22,7 @@ const UserPersonal = () => {
   const fetchUser = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/auth/getUserByUsername?username=${username}`
+        `https://kidslearn-server.vercel.app/api/auth/getUserByUsername?username=${username}`
       );
       setUser(response.data);
       setEmail(response.data.email);
@@ -36,10 +36,13 @@ const UserPersonal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:3000/auth/updateUser`, {
-        id: user._id,
-        username: newNama,
-      });
+      await axios.patch(
+        `https://kidslearn-server.vercel.app/api/auth/updateUser`,
+        {
+          id: user._id,
+          username: newNama,
+        }
+      );
       localStorage.setItem("username", newNama);
       fetchUser();
       alert("username telah di ubah");
@@ -51,7 +54,9 @@ const UserPersonal = () => {
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
-      await axios.get("http://localhost:3000/auth/userpersonal");
+      await axios.get(
+        "https://kidslearn-server.vercel.app/api/auth/userpersonal"
+      );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");
       localStorage.removeItem("email");

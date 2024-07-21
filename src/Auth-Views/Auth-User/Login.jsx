@@ -29,10 +29,13 @@ export default function Login() {
     setErrors({});
 
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://kidslearn-server.vercel.app/api/auth/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
       if (response.data.status) {
         const username = jwtDecode(response.data.token);

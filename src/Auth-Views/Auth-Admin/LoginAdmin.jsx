@@ -32,7 +32,7 @@ export default function LoginAdmin() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/admin/loginadmin",
+        "https://kidslearn-server.vercel.app/api/admin/loginadmin",
         {
           email: email,
           password: password,

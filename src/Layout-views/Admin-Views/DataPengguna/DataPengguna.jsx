@@ -20,7 +20,7 @@ const DataPengguna = () => {
   const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/auth/deleteUser/${userId}`
+        `https://kidslearn-server.vercel.app/api/auth/deleteUser/${userId}`
       );
       console.log("User deleted:", response.data.message);
       setTimeout(() => {
@@ -37,7 +37,9 @@ const DataPengguna = () => {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/auth/getUsers");
+      const response = await axios.get(
+        "https://kidslearn-server.vercel.app/api/auth/getUsers"
+      );
       setUsers(response.data);
     } catch (error) {
       console.log("Error fetching users:", error);

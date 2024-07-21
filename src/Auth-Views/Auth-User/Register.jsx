@@ -32,11 +32,14 @@ export default function Register() {
     setErrors({});
 
     try {
-      const response = await axios.post("http://localhost:3000/auth/register", {
-        username,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://kidslearn-server.vercel.app/api/auth/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
 
       if (response.data.status) {
         alert("Registrasi berhasil!");

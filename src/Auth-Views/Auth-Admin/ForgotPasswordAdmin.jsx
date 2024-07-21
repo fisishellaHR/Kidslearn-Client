@@ -14,7 +14,10 @@ export default function ForgotPasswordAdmin() {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:3000/admin/forgot-passwordadmin", data)
+      .post(
+        "https://kidslearn-server.vercel.app/api/admin/forgot-passwordadmin",
+        data
+      )
       .then((response) => {
         if (response.data.status) {
           alert("Periksa email Anda untuk tautan reset password");
