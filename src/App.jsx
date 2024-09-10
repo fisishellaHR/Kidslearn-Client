@@ -10,8 +10,6 @@ import Sidebar from "./Layout-views/Admin-Views/Dashboard/Sidebar.jsx";
 import Header from "./Layout-views/Admin-Views/Dashboard/Header.jsx";
 import Dashboard from "./Layout-views/Admin-Views/Dashboard/Dashboard.jsx";
 import UserPersonal from "./Layout-views/App-Views/UserPersonal/UserPersonal.jsx";
-import QuestionOne from "./Layout-views/App-Views/QuizQuestion/QuestionOne.jsx";
-import QuestionTwo from "./Layout-views/App-Views/QuizQuestion/QuestionTwo.jsx";
 import HomePageAfter from "./Layout-views/App-Views/HomePageAfter/HomePageAfter.jsx";
 import LoginAdmin from "./Auth-Views/Auth-Admin/LoginAdmin.jsx";
 import AboutUsAfter from "./Layout-views/App-Views/AboutUsAfter/AboutUsAfter.jsx";
@@ -24,6 +22,8 @@ import RegisterAdmin from "./Auth-Views/Auth-Admin/RegisterAdmin.jsx";
 import ForgotPasswordAdmin from "./Auth-Views/Auth-Admin/ForgotPasswordAdmin.jsx";
 import ResetPasswordAdmin from "./Auth-Views/Auth-Admin/ResetPasswordAdmin.jsx";
 import LandingPage from "./Layout-views/App-Views/LandingPage/LandingPage.jsx";
+import QuizListHTML from "./Layout-views/App-Views/QuestionView/QuizListHTML.jsx";
+import QuizListCSS from "./Layout-views/App-Views/QuestionView/QuizListCSS.jsx";
 
 function App() {
   return (
@@ -63,16 +63,15 @@ function App() {
         <Route path="/aboutusafter" element={<AboutUsAfter />}></Route>
         <Route path="/ourgoalsafter" element={<OurGoalsAfter />}></Route>
         <Route path="/quizafter" element={<QuizAfter />}></Route>
-        <Route path="/quizsatu" element={<QuestionOne />}></Route>
-        <Route path="/quizdua" element={<QuestionTwo />}></Route>
+        <Route
+          path="/quizsatu/:quizId"
+          element={<QuizListHTML />}
+        ></Route>
+        <Route path="/quizdua" element={<QuizListCSS />}></Route>
+
         <Route path="/materihtml" element={<PageHTML />}></Route>
         <Route path="/matericss" element={<PageCSS />}></Route>
-        <Route
-          path="/userpersonal/:username"
-          element={<UserPersonal />}
-        ></Route>
-        <Route path="/questionone" element={<QuestionOne />}></Route>
-        <Route path="/questiontwo" element={<QuestionTwo />}></Route>
+        <Route path="/userpersonal/:username" element={<UserPersonal />}></Route>
         <Route path="/materi" element={<LeaningMaterials />}></Route>
       </Routes>
     </BrowserRouter>

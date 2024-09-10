@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const UserPersonal = () => {
   const navigate = useNavigate();
 
+  // const { userId } = useParams();
   const { username } = useParams();
   const [newNama, SetNewNama] = useState("");
 
@@ -22,7 +23,8 @@ const UserPersonal = () => {
   const fetchUser = async () => {
     try {
       const response = await axios.get(
-        `https://kidslearn-server.vercel.app/api/auth/getUserByUsername?username=${username}`
+        // `http://127.0.0.1:3000/api/auth/getUserByUsername?username=${username}`,
+        `http://127.0.0.1:3000/api/auth/getUserByUsername?username=${username}`
       );
       setUser(response.data);
       setEmail(response.data.email);
@@ -37,7 +39,8 @@ const UserPersonal = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `https://kidslearn-server.vercel.app/api/auth/updateUser`,
+        // `http://127.0.0.1:3000/api/auth/updateUser`,
+        `http://127.0.0.1:3000/api/auth/updateUser`,
         {
           id: user._id,
           username: newNama,
@@ -55,7 +58,8 @@ const UserPersonal = () => {
     event.preventDefault();
     try {
       await axios.get(
-        "https://kidslearn-server.vercel.app/api/auth/userpersonal"
+        // "http://127.0.0.1:3000/api/auth/userpersonal"
+        "http://127.0.0.1:3000/api/auth/userpersonal"
       );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");
@@ -134,23 +138,23 @@ const UserPersonal = () => {
         <h1>Hasil Nilai Quiz</h1>
       </div>
       <div className="container p-5 mt-10 grid grid-cols-4 justify-items-center gap-x-3 border-4 border-black rounded-lg">
-        {user.quiz &&
-          user.quiz.map((quizItem) => (
+        {/* {user.answers &&
+          user.answers.map((detailAnswer) => ( */}
             <div
-              key={quizItem._id}
+              // key={detailAnswer._id}
               className="bg-primary w-full text-center rounded-lg py-8 shadow-lg"
             >
-              <h1 className="px-2 font-bowlby mb-2">{quizItem.judul}</h1>
+              <h1 className="px-2 font-bowlby mb-2">{user.quiz}</h1>
               <div className="px-2 py-2 rounded-full border-4 border-black font w-16 mx-auto mb-2">
                 <p className="font-bold">Score</p>
-                <p>{quizItem.score}</p>{" "}
+                <p>{user.score}</p>{" "}
               </div>
               <div className="flex justify-center">
                 <p className="px-2 font-poppins">Percobaan</p>
-                <p>{quizItem.percobaan}</p>{" "}
+                <p>{user.experiment}</p>{" "}
               </div>
             </div>
-          ))}
+          {/* ))} */}
       </div>
     </section>
   );

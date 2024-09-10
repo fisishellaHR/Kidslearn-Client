@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 
@@ -75,12 +75,40 @@ const questions = [
 ];
 
 const QuestionOne = () => {
+  const { quizId } = useParams()
+  const [quizes, setQuiz] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [showResult, setShowResult] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+
+  
+  useEffect(() => {
+    if (quizId) {
+      fetchQuiz();
+    }
+  }, [quizId]);
+  const fetchQuiz = async() =>{
+    try {
+      const response = await axios.get(`http://127.0.0.1:3000/api/questions/html/quizId?quizId=${quizId}`)
+      setQuiz(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  // const question2 = [
+  //     quizes.map((quiz) => {
+  //       id: quiz._id,
+  //       quiz.questions.map((question) => {
+  //         question: question.question
+  //         image: `../asset/quiz-pubertas-nomor${quiz.length+1}.png`
+
+  //       })
+  //     })
+  // ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,15 +117,14 @@ const QuestionOne = () => {
       return;
     }
     try {
-      await axios.post(
-        "https://kidslearn-server.vercel.app/api/auth/submitresult",
-        {
-          email: localStorage.getItem("email"),
-          judul: "HTML ",
-          percobaan: 0,
-          score: score,
-        }
-      );
+      await axios.post("http://127.0.0.1:3000/api/auth/submitresult", {
+        email: localStorage.getItem("email"),
+        // judul: "HTML ",
+        // percobaan: 0,
+        // score: score,
+        quizId: "66dcae41ebe2f2877f5a8c3b",
+        userAnswers: "C. Kontainer",
+      });
       setSubmitted(true);
       alert("Jawaban Anda telah dikirim");
     } catch (error) {

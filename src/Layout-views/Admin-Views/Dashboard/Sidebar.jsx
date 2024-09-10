@@ -80,6 +80,26 @@ export default function Sidebar({ setmenu, menu, setActivePage }) {
                   <span>View Module</span>
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => setActivePage("QuizCreate")}
+                  className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
+                >
+                  <VscFileSubmodule className="text-lg lg:text-2xl" />
+
+                  <span>Create Quiz</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => setActivePage("ViewQuiz")}
+                  className="relative flex items-center gap-3 w-full px-4 py-4 text-white duration-300 ease-in-out rounded-lg lg:gap-4 group hover:bg-secondary"
+                >
+                  <VscFileSubmodule className="text-lg lg:text-2xl" />
+
+                  <span>View Quiz</span>
+                </button>
+              </li>
             </ul>
           </div>
         </nav>

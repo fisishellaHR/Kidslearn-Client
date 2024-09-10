@@ -30,7 +30,8 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://kidslearn-server.vercel.app/api/auth/login",
+        // "http://127.0.0.1:3000/api/auth/login",
+        "http://127.0.0.1:3000/api/auth/login",
         {
           email: email,
           password: password,
@@ -40,6 +41,7 @@ export default function Login() {
       if (response.data.status) {
         const username = jwtDecode(response.data.token);
         localStorage.setItem("username", username.username);
+        localStorage.setItem("userId", username._id); // --> new row for improvement
         localStorage.setItem("email", response.data.email);
         console.log(response);
         alert("Berhasil Login!");

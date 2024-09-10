@@ -20,7 +20,8 @@ const DataPengguna = () => {
   const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(
-        `https://kidslearn-server.vercel.app/api/auth/deleteUser/${userId}`
+        // `http://127.0.0.1:3000/api/auth/deleteUser/${userId}`
+        `http://127.0.0.1:3000/api/auth/deleteUser/${userId}`
       );
       console.log("User deleted:", response.data.message);
       setTimeout(() => {
@@ -38,7 +39,7 @@ const DataPengguna = () => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-server.vercel.app/api/auth/getUsers"
+        "http://127.0.0.1:3000/api/auth/getUsers"
       );
       setUsers(response.data);
     } catch (error) {
@@ -76,9 +77,9 @@ const DataPengguna = () => {
         <tbody className="bg-secondary divide-y divide-primary">
           {users.map((user) => {
             return (
-              <tr key={user._id}>
+              <tr key={user.userId}>
                 <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                  {user.username}
+                  {user.userName}
                 </td>
 
                 <td className="px-1 py-2 whitespace-nowrap text-base text-white border-r border-primary text-center">
@@ -111,13 +112,13 @@ const DataPengguna = () => {
           <div>
             <h2 className="text-xl font-bold">Detail User</h2>
             <p>
-              <strong>ID:</strong> {selectedUser._id}
+              <strong>ID:</strong> {selectedUser.userId}
             </p>
             <p>
-              <strong>Username:</strong> {selectedUser.username}
+              <strong>Username:</strong> {selectedUser.userName}
             </p>
             <p>
-              <strong>Email:</strong> {selectedUser.email}
+              <strong>Email:</strong> {selectedUser.userEmail}
             </p>
             <button
               className="mt-4 px-4 py-2 bg-red-500 text-white rounded"

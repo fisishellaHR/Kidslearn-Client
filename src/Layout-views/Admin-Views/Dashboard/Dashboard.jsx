@@ -9,6 +9,8 @@ import axios from "axios";
 import NilaiPengguna from "../NilaiPengguna/NilaiPengguna";
 import DataPengguna from "../DataPengguna/DataPengguna";
 import ViewModule from "../ViewModule/ViewModule";
+import QuizCreation from "../QuizCreate/QuizCreation";
+import ViewQuiz from "../ViewQuiz/ViewQuiz";
 
 export default function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,6 +35,10 @@ export default function Dashboard() {
         return <DataPengguna />;
       case "ViewModule":
         return <ViewModule />;
+      case "QuizCreate":
+        return <QuizCreation />;
+      case "ViewQuiz":
+        return < ViewQuiz/>;
       default:
         return <div>Select a page</div>;
     }

@@ -88,15 +88,12 @@ const QuestionTwo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        " https://kidslearn-server.vercel.app/api/auth/submitresult",
-        {
-          email: localStorage.getItem("email"),
-          judul: judul,
-          percobaan: percobaan,
-          score: score,
-        }
-      );
+      await axios.post(" http://127.0.0.1:3000/api/auth/submitresult", {
+        email: localStorage.getItem("email"),
+        judul: judul,
+        percobaan: percobaan,
+        score: score,
+      });
       setSubmitted(true);
       alert("Jawaban Anda telah dikirim");
     } catch (error) {

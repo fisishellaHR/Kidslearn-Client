@@ -58,7 +58,9 @@ export default function QuizContentAfter() {
             pengetahuan dasar kamu nih, HTML lebih lanjut!
           </motion.p>
           <motion.div variants={itemVariants}>
-            <ButtonQuiz to="/quizsatu">Mulai Quiz</ButtonQuiz>
+            <ButtonQuiz to="/quizsatu/66def456c85bab5bc2d9da24">
+              Mulai Quiz
+            </ButtonQuiz>
           </motion.div>
         </motion.div>
 

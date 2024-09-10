@@ -11,7 +11,8 @@ export default function Header() {
     event.preventDefault();
     try {
       await axios.get(
-        "https://kidslearn-client.vercel.app/api/admin/logoutadmin"
+        // "https://kidslearn-client.vercel.app/api/admin/logoutadmin"
+        "http://127.0.0.1:3000/api/admin/logoutadmin"
       );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");

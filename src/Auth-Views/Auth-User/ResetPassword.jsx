@@ -27,7 +27,7 @@ export default function ResetPassword() {
     }
     try {
       const response = await axios.post(
-        "https://kidslearn-server.vercel.app/api/auth/reset-password",
+        "http://127.0.0.1:3000/api/auth/reset-password",
         {
           password,
           token,
