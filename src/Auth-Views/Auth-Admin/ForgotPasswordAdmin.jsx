@@ -15,7 +15,7 @@ export default function ForgotPasswordAdmin() {
   const onSubmit = (data) => {
     axios
       .post(
-        "https://kidslearn-client.vercel.app/api/admin/forgot-passwordadmin",
+        "https://kidslearn-server.vercel.app/api/admin/forgot-passwordadmin",
         data
       )
       .then((response) => {

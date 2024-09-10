@@ -33,7 +33,7 @@ export default function Register() {
 
     try {
       const response = await axios.post(
-        "https://kidslearn-client.vercel.app/api/auth/register",
+        "https://kidslearn-server.vercel.app/api/auth/register",
         {
           username,
           email,

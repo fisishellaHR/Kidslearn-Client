@@ -57,7 +57,7 @@ const HtmlContent = () => {
   const getModulesHTML = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-client.vercel.app/api/module/getModules"
+        "https://kidslearn-server.vercel.app/api/module/getModules"
       );
       console.log(response.data);
       setModulesHTML(response.data);

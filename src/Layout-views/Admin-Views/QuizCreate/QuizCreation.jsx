@@ -92,7 +92,7 @@ const QuizCreation = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `https://kidslearn-client.vercel.app/api/questions/${category}/create`,
+        `https://kidslearn-server.vercel.app/api/questions/${category}/create`,
         {
           method: "POST",
           headers: {
