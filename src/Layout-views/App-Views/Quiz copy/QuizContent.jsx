@@ -32,7 +32,7 @@ export default function QuizContentAfter() {
 
         // Fetch data untuk CSS
         const cssResponse = await fetch(
-          "http://localhost:3001/api/questions/css"
+          "https://kidslearn-server.vercel.app/api/questions/css"
         );
         const cssData = await cssResponse.json();
 
