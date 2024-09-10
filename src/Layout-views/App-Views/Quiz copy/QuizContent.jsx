@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import ButtonQuiz from "../../../Components/shared-components/ButtonQuiz";
 import cardquiz from "../../../../public/Landing-Views/Quiz/ImageCardSatu-Quiz.png";
 import quizheading from "../../../../public/Landing-Views/Quiz/ImageHeading-Quiz.png";
+import { useParams } from "react-router-dom"; // Import useParams
 
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -20,19 +21,20 @@ const itemVariants = {
 
 export default function QuizContentAfter() {
   const [quizzes, setQuizzes] = useState([]);
+  const { quizId } = useParams(); // Ambil quizId dari URL
 
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
         // Fetch data untuk HTML
         const htmlResponse = await fetch(
-          "http://localhost:3001/api/questions/html"
+          `https://kidslearn-server.vercel.app/api/questions/html/quiz/${quizId}`
         );
         const htmlData = await htmlResponse.json();
 
         // Fetch data untuk CSS
         const cssResponse = await fetch(
-          "https://kidslearn-server.vercel.app/api/questions/css"
+          `https://kidslearn-server.vercel.app/api/questions/css/quiz/${quizId}`
         );
         const cssData = await cssResponse.json();
 
@@ -44,7 +46,11 @@ export default function QuizContentAfter() {
     };
 
     fetchQuizzes();
-  }, []);
+  }, [quizId]); // Tambahkan quizId ke dalam array dependensi
+
+  // Menentukan jenis quiz berdasarkan quiz.title
+  const isHTMLQuiz = quizzes.some((quiz) => quiz.title.includes("HTML"));
+  const isCSSQuiz = quizzes.some((quiz) => quiz.title.includes("CSS"));
 
   return (
     <>
@@ -59,72 +65,74 @@ export default function QuizContentAfter() {
         </motion.div>
 
         {/* Konten Statis untuk HTML */}
-        <motion.div
-          className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12 mb-8"
-          variants={itemVariants}
-        >
+        {isHTMLQuiz && (
           <motion.div
-            className="flex flex-col md:flex-row items-center justify-between gap-x-20 text-white w-full lg:w-3/4"
+            className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12 mb-8"
             variants={itemVariants}
           >
-            <img
-              src={cardquiz}
-              alt="Card Quiz"
-              className="max-w-xs w-full md:w-1/3"
-            />
-            <div className="border-b-2 border-white text-center md:text-left w-full md:w-2/3">
-              <h1 className="font-bowlby text-[40px] md:text-[80px]">
-                Main Quiz
-              </h1>
-              <h2 className="font-bowlby text-[32px] md:text-[48px]">HTML</h2>
-            </div>
+            <motion.div
+              className="flex flex-col md:flex-row items-center justify-between gap-x-20 text-white w-full lg:w-3/4"
+              variants={itemVariants}
+            >
+              <img
+                src={cardquiz}
+                alt="Card Quiz"
+                className="max-w-xs w-full md:w-1/3"
+              />
+              <div className="border-b-2 border-white text-center md:text-left w-full md:w-2/3">
+                <h1 className="font-bowlby text-[40px] md:text-[80px]">
+                  Main Quiz
+                </h1>
+                <h2 className="font-bowlby text-[32px] md:text-[48px]">HTML</h2>
+              </div>
+            </motion.div>
+            <motion.p
+              className="text-center font-poppins text-2xl px-4 w-full md:w-2/3 lg:w-[813px]"
+              variants={itemVariants}
+            >
+              Hai Sobat Kids! Yuk coba mainkan quiz ini supaya meningkatkan
+              pengetahuan dasar kamu nih, HTML lebih lanjut!
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <ButtonQuiz to={`/quizsatu/${quizId}`}>Mulai Quiz</ButtonQuiz>
+            </motion.div>
           </motion.div>
-          <motion.p
-            className="text-center font-poppins text-2xl px-4 w-full md:w-2/3 lg:w-[813px]"
-            variants={itemVariants}
-          >
-            Hai Sobat Kids! Yuk coba mainkan quiz ini supaya meningkatkan
-            pengetahuan dasar kamu nih, HTML lebih lanjut!
-          </motion.p>
-          <motion.div variants={itemVariants}>
-            <ButtonQuiz to="/quizsatu/66def456c85bab5bc2d9da24">
-              Mulai Quiz
-            </ButtonQuiz>
-          </motion.div>
-        </motion.div>
+        )}
 
         {/* Konten Statis untuk CSS */}
-        <motion.div
-          className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12"
-          variants={itemVariants}
-        >
+        {isCSSQuiz && (
           <motion.div
-            className="flex flex-col md:flex-row items-center justify-between gap-x-20 text-white w-full lg:w-3/4"
+            className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12"
             variants={itemVariants}
           >
-            <img
-              src={cardquiz}
-              alt="Card Quiz"
-              className="max-w-xs w-full md:w-1/3"
-            />
-            <div className="border-b-2 border-white text-center md:text-left w-full md:w-2/3">
-              <h1 className="font-bowlby text-[40px] md:text-[80px]">
-                Main Quiz
-              </h1>
-              <h2 className="font-bowlby text-[32px] md:text-[48px]">CSS</h2>
-            </div>
+            <motion.div
+              className="flex flex-col md:flex-row items-center justify-between gap-x-20 text-white w-full lg:w-3/4"
+              variants={itemVariants}
+            >
+              <img
+                src={cardquiz}
+                alt="Card Quiz"
+                className="max-w-xs w-full md:w-1/3"
+              />
+              <div className="border-b-2 border-white text-center md:text-left w-full md:w-2/3">
+                <h1 className="font-bowlby text-[40px] md:text-[80px]">
+                  Main Quiz
+                </h1>
+                <h2 className="font-bowlby text-[32px] md:text-[48px]">CSS</h2>
+              </div>
+            </motion.div>
+            <motion.p
+              className="text-center font-poppins text-2xl px-4 w-full md:w-2/3 lg:w-[813px]"
+              variants={itemVariants}
+            >
+              Hai Sobat Kids! Yuk coba mainkan quiz ini supaya meningkatkan
+              pengetahuan dasar kamu nih, CSS lebih lanjut!
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <ButtonQuiz to={`/quizdua/${quizId}`}>Mulai Quiz</ButtonQuiz>
+            </motion.div>
           </motion.div>
-          <motion.p
-            className="text-center font-poppins text-2xl px-4 w-full md:w-2/3 lg:w-[813px]"
-            variants={itemVariants}
-          >
-            Hai Sobat Kids! Yuk coba mainkan quiz ini supaya meningkatkan
-            pengetahuan dasar kamu nih, CSS lebih lanjut!
-          </motion.p>
-          <motion.div variants={itemVariants}>
-            <ButtonQuiz to="/quizdua">Mulai Quiz</ButtonQuiz>
-          </motion.div>
-        </motion.div>
+        )}
 
         {/* Mapping Data Kuis untuk Tombol Dinamis */}
         {quizzes.map((quiz) => (
@@ -133,10 +141,11 @@ export default function QuizContentAfter() {
             className="flex gap-4"
             variants={itemVariants}
           >
-            {quiz.subject === "HTML" && (
+            {/* Tombol berdasarkan title */}
+            {quiz.title.includes("HTML") && (
               <ButtonQuiz to={`/quiz/${quiz._id}`}>Mulai Quiz HTML</ButtonQuiz>
             )}
-            {quiz.subject === "CSS" && (
+            {quiz.title.includes("CSS") && (
               <ButtonQuiz to={`/quiz/${quiz._id}`}>Mulai Quiz CSS</ButtonQuiz>
             )}
           </motion.div>
