@@ -48,10 +48,6 @@ export default function QuizContentAfter() {
     fetchQuizzes();
   }, [quizId]); // Tambahkan quizId ke dalam array dependensi
 
-  // Menentukan jenis quiz berdasarkan quiz.title
-  const isHTMLQuiz = quizzes.some((quiz) => quiz.title.includes("HTML"));
-  const isCSSQuiz = quizzes.some((quiz) => quiz.title.includes("CSS"));
-
   return (
     <>
       <motion.div
@@ -65,7 +61,7 @@ export default function QuizContentAfter() {
         </motion.div>
 
         {/* Konten Statis untuk HTML */}
-        {isHTMLQuiz && (
+        {quizzes.some((quiz) => quiz.title.includes("HTML")) && (
           <motion.div
             className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12 mb-8"
             variants={itemVariants}
@@ -100,7 +96,7 @@ export default function QuizContentAfter() {
         )}
 
         {/* Konten Statis untuk CSS */}
-        {isCSSQuiz && (
+        {quizzes.some((quiz) => quiz.title.includes("CSS")) && (
           <motion.div
             className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12"
             variants={itemVariants}
@@ -143,10 +139,10 @@ export default function QuizContentAfter() {
           >
             {/* Tombol berdasarkan title */}
             {quiz.title.includes("HTML") && (
-              <ButtonQuiz to={`/quiz/${quiz._id}`}>Mulai Quiz HTML</ButtonQuiz>
+              <ButtonQuiz to={`/quiz/${quiz._id}`}>{quiz.title}</ButtonQuiz>
             )}
             {quiz.title.includes("CSS") && (
-              <ButtonQuiz to={`/quiz/${quiz._id}`}>Mulai Quiz CSS</ButtonQuiz>
+              <ButtonQuiz to={`/quiz/${quiz._id}`}>{quiz.title}</ButtonQuiz>
             )}
           </motion.div>
         ))}
