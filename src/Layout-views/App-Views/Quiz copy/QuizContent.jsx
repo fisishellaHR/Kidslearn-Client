@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ButtonQuiz from "../../../Components/shared-components/ButtonQuiz";
 import cardquiz from "../../../../public/Landing-Views/Quiz/ImageCardSatu-Quiz.png";
@@ -18,6 +19,33 @@ const itemVariants = {
 };
 
 export default function QuizContentAfter() {
+  const [quizzes, setQuizzes] = useState([]);
+
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      try {
+        // Fetch data untuk HTML
+        const htmlResponse = await fetch(
+          "http://localhost:3001/api/questions/html"
+        );
+        const htmlData = await htmlResponse.json();
+
+        // Fetch data untuk CSS
+        const cssResponse = await fetch(
+          "http://localhost:3001/api/questions/css"
+        );
+        const cssData = await cssResponse.json();
+
+        // Gabungkan data HTML dan CSS
+        setQuizzes([...htmlData, ...cssData]);
+      } catch (error) {
+        console.error("Error fetching quizzes:", error);
+      }
+    };
+
+    fetchQuizzes();
+  }, []);
+
   return (
     <>
       <motion.div
@@ -30,6 +58,7 @@ export default function QuizContentAfter() {
           <img src={quizheading} alt="Quiz Heading" className="mx-auto" />
         </motion.div>
 
+        {/* Konten Statis untuk HTML */}
         <motion.div
           className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12 mb-8"
           variants={itemVariants}
@@ -64,6 +93,7 @@ export default function QuizContentAfter() {
           </motion.div>
         </motion.div>
 
+        {/* Konten Statis untuk CSS */}
         <motion.div
           className="bg-primary rounded-3xl flex flex-col items-center justify-center gap-12 py-12"
           variants={itemVariants}
@@ -95,6 +125,22 @@ export default function QuizContentAfter() {
             <ButtonQuiz to="/quizdua">Mulai Quiz</ButtonQuiz>
           </motion.div>
         </motion.div>
+
+        {/* Mapping Data Kuis untuk Tombol Dinamis */}
+        {quizzes.map((quiz) => (
+          <motion.div
+            key={quiz._id}
+            className="flex gap-4"
+            variants={itemVariants}
+          >
+            {quiz.subject === "HTML" && (
+              <ButtonQuiz to={`/quiz/${quiz._id}`}>Mulai Quiz HTML</ButtonQuiz>
+            )}
+            {quiz.subject === "CSS" && (
+              <ButtonQuiz to={`/quiz/${quiz._id}`}>Mulai Quiz CSS</ButtonQuiz>
+            )}
+          </motion.div>
+        ))}
       </motion.div>
     </>
   );
