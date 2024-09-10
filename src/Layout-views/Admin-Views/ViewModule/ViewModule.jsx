@@ -27,7 +27,7 @@ const ViewModule = () => {
   const deleteModulesHTML = async (id) => {
     try {
       const response = await axios.delete(
-        `https://kidslearn-client.vercel.app//api/module/deleteModules/${id}`
+        `https://kidslearn-client.vercel.app/api/module/deleteModules/${id}`
       );
       alert("Data Berhasil Terhapus");
       console.log(response.data);
@@ -44,7 +44,7 @@ const ViewModule = () => {
   const deleteModulesCSS = async (id) => {
     try {
       const response = await axios.delete(
-        `https://kidslearn-client.vercel.app//api/moduledua/deleteModules/${id}`
+        `https://kidslearn-client.vercel.app/api/moduledua/deleteModules/${id}`
       );
       alert("Data Berhasil Terhapus");
       console.log(response.data);
@@ -62,7 +62,7 @@ const ViewModule = () => {
   const getModulesHTML = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-client.vercel.app//api/module/getModules"
+        "https://kidslearn-client.vercel.app/api/module/getModules"
       );
       console.log(response.data);
       setModulesHTML(response.data);
@@ -77,7 +77,7 @@ const ViewModule = () => {
   const getModulesCSS = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-client.vercel.app//api/moduledua/getModules"
+        "https://kidslearn-client.vercel.app/api/moduledua/getModules"
       );
       console.log(response.data);
       setModulesCSS(response.data);
@@ -94,7 +94,7 @@ const ViewModule = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `https://kidslearn-client.vercel.app//api/${rute}/updateModule`,
+        `https://kidslearn-client.vercel.app/api/${rute}/updateModule`,
         {
           id: selectedModules._id,
           judul,

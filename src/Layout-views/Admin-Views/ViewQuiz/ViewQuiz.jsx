@@ -22,7 +22,7 @@ const ViewQuiz = () => {
   const fetchQuizzes = async (type) => {
     try {
       const response = await axios.get(
-        `https://kidslearn-client.vercel.app//api/questions/${type}/all`
+        `https://kidslearn-client.vercel.app/api/questions/${type}/all`
       );
       setQuizzes((prev) => ({ ...prev, [type]: response.data }));
     } catch (error) {
@@ -37,7 +37,7 @@ const ViewQuiz = () => {
     if (confirmation) {
       try {
         const response = await axios.delete(
-          `https://kidslearn-client.vercel.app//api/questions/${type}/quiz/${quiz._id}`
+          `https://kidslearn-client.vercel.app/api/questions/${type}/quiz/${quiz._id}`
         );
         if (response.status === 200) {
           alert(`Quiz successfully deleted! 🎉`);
@@ -87,7 +87,7 @@ const ViewQuiz = () => {
 
     try {
       await axios.put(
-        `https://kidslearn-client.vercel.app//api/questions/${route}/edit-multiple`,
+        `https://kidslearn-client.vercel.app/api/questions/${route}/edit-multiple`,
         [{ _id: selectedQuiz._id, title, questions, passGrade }]
       );
       alert("Quiz successfully updated");

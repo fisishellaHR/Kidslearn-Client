@@ -20,8 +20,8 @@ const DataPengguna = () => {
   const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(
-        // `https://kidslearn-client.vercel.app//api/auth/deleteUser/${userId}`
-        `https://kidslearn-client.vercel.app//api/auth/deleteUser/${userId}`
+        // `https://kidslearn-client.vercel.app/api/auth/deleteUser/${userId}`
+        `https://kidslearn-client.vercel.app/api/auth/deleteUser/${userId}`
       );
       console.log("User deleted:", response.data.message);
       setTimeout(() => {
@@ -39,7 +39,7 @@ const DataPengguna = () => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-client.vercel.app//api/auth/getUsers"
+        "https://kidslearn-client.vercel.app/api/auth/getUsers"
       );
       setUsers(response.data);
     } catch (error) {

@@ -12,7 +12,7 @@ export default function Header() {
     try {
       await axios.get(
         // "https://kidslearn-client.vercel.app/api/admin/logoutadmin"
-        "https://kidslearn-client.vercel.app//api/admin/logoutadmin"
+        "https://kidslearn-client.vercel.app/api/admin/logoutadmin"
       );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");

@@ -27,7 +27,7 @@ export default function ResetPassword() {
     }
     try {
       const response = await axios.post(
-        "https://kidslearn-client.vercel.app//api/auth/reset-password",
+        "https://kidslearn-client.vercel.app/api/auth/reset-password",
         {
           password,
           token,
