@@ -89,11 +89,10 @@ const QuizCreation = () => {
 
   // Handle form submission
   const handleSubmit = async (event) => {
-    
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://127.0.0.1:3000/api/questions/${category}/create`,
+        `https://kidslearn-client.vercel.app//api/questions/${category}/create`,
         {
           method: "POST",
           headers: {

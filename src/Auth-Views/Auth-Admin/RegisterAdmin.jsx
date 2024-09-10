@@ -33,7 +33,7 @@ const RegisterAdmin = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/admin/registeradmin",
+        "https://kidslearn-client.vercel.app//api/admin/registeradmin",
         {
           username,
           email,

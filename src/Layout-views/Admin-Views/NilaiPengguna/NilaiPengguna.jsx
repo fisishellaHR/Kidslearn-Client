@@ -8,7 +8,7 @@ const NilaiPengguna = () => {
     const getUsers = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:3000/api/auth/getUsers"
+          "https://kidslearn-client.vercel.app//api/auth/getUsers"
         );
         setUsers(response.data);
       } catch (error) {
@@ -41,10 +41,10 @@ const NilaiPengguna = () => {
               <td className="px-6 py-4 whitespace-nowrap text-base text-white">
                 <ul>
                   {/* {user.quiz.map((quizItem) => ( */}
-                    <li className="flex">
-                      <p className="px-2">Percobaan Ke</p>
-                      {user.experiment} | {user.title} : {user.score}
-                    </li>
+                  <li className="flex">
+                    <p className="px-2">Percobaan Ke</p>
+                    {user.experiment} | {user.title} : {user.score}
+                  </li>
                   {/* ))} */}
                 </ul>
               </td>

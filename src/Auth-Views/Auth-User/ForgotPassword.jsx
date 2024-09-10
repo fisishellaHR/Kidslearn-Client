@@ -14,7 +14,10 @@ export default function ForgotPassword() {
 
   const onSubmit = (data) => {
     axios
-      .post("http://127.0.0.1:3000/api/auth/forgot-password", data)
+      .post(
+        "https://kidslearn-client.vercel.app//api/auth/forgot-password",
+        data
+      )
       .then((response) => {
         if (response.data.status) {
           alert("Check your email to reset your password link");

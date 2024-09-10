@@ -26,8 +26,8 @@ export default function MaterialsContent() {
 
     try {
       const response = await axios.post(
-        // "http://127.0.0.1:3000/api/auth/addsuggestion",
-        "http://127.0.0.1:3000/api/auth/addsuggestion",
+        // "https://kidslearn-client.vercel.app//api/auth/addsuggestion",
+        "https://kidslearn-client.vercel.app//api/auth/addsuggestion",
         {
           email: email,
           suggestion: suggestion,
