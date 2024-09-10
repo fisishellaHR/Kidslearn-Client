@@ -8,7 +8,7 @@ const NilaiPengguna = () => {
     const getUsers = async () => {
       try {
         const response = await axios.get(
-          "https://kidslearn-server.vercel.app/api/auth/getUsers"
+          "http://127.0.0.1:3000/api/auth/getUsers"
         );
         setUsers(response.data);
       } catch (error) {

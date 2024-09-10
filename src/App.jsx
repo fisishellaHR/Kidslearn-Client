@@ -67,7 +67,7 @@ function App() {
           path="/quizsatu/:quizId"
           element={<QuizListHTML />}
         ></Route>
-        <Route path="/quizdua" element={<QuizListCSS />}></Route>
+        <Route path="/quizdua/:quizId" element={<QuizListCSS />}></Route>
 
         <Route path="/materihtml" element={<PageHTML />}></Route>
         <Route path="/matericss" element={<PageCSS />}></Route>

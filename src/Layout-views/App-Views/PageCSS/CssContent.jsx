@@ -69,8 +69,8 @@ export default function CssContent() {
   const getModulesCSS = async () => {
     try {
       const response = await axios.get(
-        // "https://kidslearn-server.vercel.app/api/moduledua/getModules"
-        "https://kidslearn-server.vercel.app/api/moduledua/getModules"
+        // "http://127.0.0.1:3000/api/moduledua/getModules"
+        "http://127.0.0.1:3000/api/moduledua/getModules"
       );
       console.log(response.data);
       setModulesCSS(response.data);

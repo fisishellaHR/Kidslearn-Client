@@ -14,9 +14,9 @@ export const FormMateri = () => {
 
     let endpoint = "";
     if (temaModule === "html") {
-      endpoint = "https://kidslearn-server.vercel.app/api/module/addModules";
+      endpoint = "http://127.0.0.1:3000/api/module/addModules";
     } else if (temaModule === "css") {
-      endpoint = "https://kidslearn-server.vercel.app/api/moduledua/addModules";
+      endpoint = "http://127.0.0.1:3000/api/moduledua/addModules";
     }
     try {
       await axios.post(endpoint, {

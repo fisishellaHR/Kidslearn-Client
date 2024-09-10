@@ -12,7 +12,7 @@ const QuizListCSS = () => {
     const fetchQuizzes = async () => {
       try {
         const response = await fetch(
-          "https://kidslearn-server.vercel.app/api/questions/css/all"
+          "http://127.0.0.1:3000/api/questions/css/all"
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -55,7 +55,7 @@ const QuizListCSS = () => {
 
     try {
       const response = await fetch(
-        `https://kidslearn-server.vercel.app/api/questions/css/${quizId}/submit`,
+        `http://127.0.0.1:3000/api/questions/css/${quizId}/submit`,
         {
           method: "POST",
           headers: {
