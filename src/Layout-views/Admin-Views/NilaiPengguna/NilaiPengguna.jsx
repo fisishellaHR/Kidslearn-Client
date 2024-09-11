@@ -37,18 +37,18 @@ const NilaiPengguna = () => {
           {users.map((user) => (
             <tr key={user.userId}>
               <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                {user.userName}
+                {user.userName || "Unknown User"}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-base text-white">
                 <ul>
-                  {/* Pastikan user.quiz adalah array sebelum dilakukan mapping */}
                   {Array.isArray(user.quiz) ? (
                     user.quiz.map((quizItem, index) => (
                       <li key={index} className="flex">
                         <p className="px-2">
-                          Percobaan Ke {quizItem.experiment || "N/A"}
+                          Percobaan Ke {quizItem?.experiment || "N/A"}
                         </p>
-                        | {quizItem.title || "N/A"} : {quizItem.score || "N/A"}
+                        | {quizItem?.title || "No Title"} :{" "}
+                        {quizItem?.score ?? "N/A"}
                       </li>
                     ))
                   ) : (
