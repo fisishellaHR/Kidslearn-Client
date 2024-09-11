@@ -58,7 +58,6 @@ const UserPersonal = () => {
     event.preventDefault();
     try {
       await axios.get(
-        // "https://kidslearn-server.vercel.app/api/auth/userpersonal"
         "https://kidslearn-server.vercel.app/api/auth/userpersonal"
       );
       alert("Berhasil Logout!");
@@ -138,12 +137,7 @@ const UserPersonal = () => {
         <h1>Hasil Nilai Quiz</h1>
       </div>
       <div className="container p-5 mt-10 grid grid-cols-4 justify-items-center gap-x-3 border-4 border-black rounded-lg">
-        {/* {user.answers &&
-          user.answers.map((detailAnswer) => ( */}
-        <div
-          // key={detailAnswer._id}
-          className="bg-primary w-full text-center rounded-lg py-8 shadow-lg"
-        >
+        <div className="bg-primary w-full text-center rounded-lg py-8 shadow-lg">
           <h1 className="px-2 font-bowlby mb-2">{user.quiz}</h1>
           <div className="px-2 py-2 rounded-full border-4 border-black font w-16 mx-auto mb-2">
             <p className="font-bold">Score</p>

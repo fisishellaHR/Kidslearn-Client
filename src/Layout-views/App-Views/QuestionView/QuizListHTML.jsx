@@ -30,24 +30,32 @@ const QuizListHTML = () => {
     };
 
     fetchQuizzes();
-  }, []);
+  }, [quizId]);
 
   const handleAnswerChange = (quizId, questionIndex, answer) => {
     setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
       [quizId]: {
-        ...(prevAnswers[quizId] || []),
-        [questionIndex]: answer,
+        ...(prevAnswers[quizId] || {}), // Ini mempertahankan jawaban sebelumnya
+        [questionIndex]: answer, // Set jawaban baru untuk pertanyaan yang dipilih
       },
     }));
-    console.log(userAnswers);
+
+    // Debugging untuk melihat apakah jawaban sudah tersimpan
+    console.log("Updated userAnswers:", {
+      ...userAnswers,
+      [quizId]: {
+        ...(userAnswers[quizId] || {}),
+        [questionIndex]: answer,
+      },
+    });
   };
 
   const handleSubmit = async (quizId) => {
     try {
       const answersForQuiz = userAnswers[quizId] || {};
 
-      // Prepare answers as an array
+      // Format jawaban sebagai array
       const formattedAnswers = Object.entries(answersForQuiz).map(
         ([questionIndex, answer]) => ({
           questionIndex: parseInt(questionIndex),
@@ -98,7 +106,6 @@ const QuizListHTML = () => {
       <div className="max-w-4xl w-full bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold mb-6 text-center">All Quizzes</h1>
         <form>
-          {/* {quizzes.map((quiz) => ( */}
           <div key={quizzes._id} className="mb-6">
             <h2 className="text-xl font-semibold mb-4">{quizzes.title}</h2>
             <p className="text-gray-600 mb-4">
@@ -147,7 +154,6 @@ const QuizListHTML = () => {
               Submit
             </button>
           </div>
-          {/* ))} */}
         </form>
       </div>
     </div>

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 const NilaiPengguna = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -11,13 +13,24 @@ const NilaiPengguna = () => {
           "https://kidslearn-server.vercel.app/api/auth/getUsers"
         );
         setUsers(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching users:", error);
+        setError("Failed to fetch users");
+        setLoading(false);
       }
     };
 
     getUsers();
   }, []);
+
+  if (loading) {
+    return <div className="text-center text-xl">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>;
+  }
 
   return (
     <div className="overflow-auto bg-primary shadow-md rounded-lg p-6">
@@ -34,19 +47,12 @@ const NilaiPengguna = () => {
         </thead>
         <tbody className="bg-secondary divide-y divide-primary">
           {users.map((user) => (
-            <tr key={user.userId}>
-              <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                {user.userName}
+            <tr key={user._id}>
+              <td className="px-6 py-4 whitespace-nowrap text-lg font-medium text-white">
+                {user.username}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-base text-white">
-                <ul>
-                  {/* {user.quiz.map((quizItem) => ( */}
-                  <li className="flex">
-                    <p className="px-2">Percobaan Ke</p>
-                    {user.experiment} | {user.title} : {user.score}
-                  </li>
-                  {/* ))} */}
-                </ul>
+              <td className="px-6 py-4 whitespace-nowrap text-lg font-medium text-white">
+                {user.quizScore ? user.quizScore.toFixed(2) + "%" : "N/A"}
               </td>
             </tr>
           ))}
