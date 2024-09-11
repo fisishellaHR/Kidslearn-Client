@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ButtonQuiz from "../../../Components/shared-components/ButtonQuiz";
@@ -28,13 +29,13 @@ export default function QuizContentAfter() {
       try {
         // Fetch data untuk HTML
         const htmlResponse = await fetch(
-          `http://127.0.0.1:3000/api/questions/html/one/quiz`
+          `https://kidslearn-server.vercel.app/api/questions/html/one/quiz`
         );
         const htmlData = await htmlResponse.json();
         // setQuizzes(htmlData);
         // Fetch data untuk CSS
         const cssResponse = await fetch(
-          `http://127.0.0.1:3000/api/questions/css/one/quiz`
+          `https://kidslearn-server.vercel.app/api/questions/css/one/quiz`
         );
         const cssData = await cssResponse.json();
         // setQuizzes(cssData);

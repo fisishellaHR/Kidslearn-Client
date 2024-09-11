@@ -30,8 +30,8 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        // "http://127.0.0.1:3000/api/auth/login",
-        "http://127.0.0.1:3000/api/auth/login",
+        // "https://kidslearn-server.vercel.app/api/auth/login",
+        "https://kidslearn-server.vercel.app/api/auth/login",
         {
           email: email,
           password: password,

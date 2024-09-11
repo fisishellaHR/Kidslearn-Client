@@ -23,8 +23,8 @@ const UserPersonal = () => {
   const fetchUser = async () => {
     try {
       const response = await axios.get(
-        // `http://127.0.0.1:3000/api/auth/getUserByUsername?username=${username}`,
-        `http://127.0.0.1:3000/api/auth/getUserByUsername?username=${username}`
+        // `https://kidslearn-server.vercel.app/api/auth/getUserByUsername?username=${username}`,
+        `https://kidslearn-server.vercel.app/api/auth/getUserByUsername?username=${username}`
       );
       setUser(response.data);
       setEmail(response.data.email);
@@ -39,8 +39,8 @@ const UserPersonal = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        // `http://127.0.0.1:3000/api/auth/updateUser`,
-        `http://127.0.0.1:3000/api/auth/updateUser`,
+        // `https://kidslearn-server.vercel.app/api/auth/updateUser`,
+        `https://kidslearn-server.vercel.app/api/auth/updateUser`,
         {
           id: user._id,
           username: newNama,
@@ -58,8 +58,8 @@ const UserPersonal = () => {
     event.preventDefault();
     try {
       await axios.get(
-        // "http://127.0.0.1:3000/api/auth/userpersonal"
-        "http://127.0.0.1:3000/api/auth/userpersonal"
+        // "https://kidslearn-server.vercel.app/api/auth/userpersonal"
+        "https://kidslearn-server.vercel.app/api/auth/userpersonal"
       );
       alert("Berhasil Logout!");
       localStorage.removeItem("username");
