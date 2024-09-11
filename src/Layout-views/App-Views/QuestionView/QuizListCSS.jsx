@@ -33,21 +33,19 @@ const QuizListCSS = () => {
   }, [quizId]);
 
   const handleAnswerChange = (quizId, questionIndex, answer) => {
-    setUserAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [quizId]: {
-        ...(prevAnswers[quizId] || {}), // Ini mempertahankan jawaban sebelumnya
-        [questionIndex]: answer, // Set jawaban baru untuk pertanyaan yang dipilih
-      },
-    }));
+    setUserAnswers((prevAnswers) => {
+      const updatedAnswers = {
+        ...prevAnswers,
+        [quizId]: {
+          ...(prevAnswers[quizId] || {}),
+          [questionIndex]: answer,
+        },
+      };
 
-    // Debugging untuk melihat apakah jawaban sudah tersimpan
-    console.log("Updated userAnswers:", {
-      ...userAnswers,
-      [quizId]: {
-        ...(userAnswers[quizId] || {}),
-        [questionIndex]: answer,
-      },
+      // Debugging untuk melihat apakah jawaban sudah tersimpan
+      console.log("Updated userAnswers:", updatedAnswers);
+
+      return updatedAnswers;
     });
   };
 
