@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const QuizListCSS = () => {
   const { quizId } = useParams();
-  const [quizzes, setQuizzes] = useState(null);
+  const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
@@ -32,19 +32,31 @@ const QuizListCSS = () => {
     fetchQuizzes();
   }, [quizId]);
 
-  const handleAnswerChange = (questionIndex, answer) => {
+  const handleAnswerChange = (quizId, questionIndex, answer) => {
     setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionIndex]: answer,
+      [quizId]: {
+        ...(prevAnswers[quizId] || {}), // Ini mempertahankan jawaban sebelumnya
+        [questionIndex]: answer, // Set jawaban baru untuk pertanyaan yang dipilih
+      },
     }));
 
     // Debugging untuk melihat apakah jawaban sudah tersimpan
-    console.log("Updated userAnswers:", userAnswers);
+    console.log("Updated userAnswers:", {
+      ...userAnswers,
+      [quizId]: {
+        ...(userAnswers[quizId] || {}),
+        [questionIndex]: answer,
+      },
+    });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (quizId) => {
     try {
-      const formattedAnswers = Object.entries(userAnswers).map(
+      const answersForQuiz = userAnswers[quizId] || {};
+
+      // Format jawaban sebagai array
+      const formattedAnswers = Object.entries(answersForQuiz).map(
         ([questionIndex, answer]) => ({
           questionIndex: parseInt(questionIndex),
           answer,
@@ -71,10 +83,10 @@ const QuizListCSS = () => {
       }
 
       const result = await response.json();
-      setResults(result);
-
-      // Debugging response dari server
-      console.log("Submit result:", result);
+      setResults((prevResults) => ({
+        ...prevResults,
+        [quizId]: result,
+      }));
     } catch (error) {
       console.error("Error submitting answers:", error);
       setError("Failed to submit answers");
@@ -94,54 +106,54 @@ const QuizListCSS = () => {
       <div className="max-w-4xl w-full bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold mb-6 text-center">All Quizzes</h1>
         <form>
-          {quizzes && (
-            <div key={quizzes._id} className="mb-6">
-              <h2 className="text-xl font-semibold mb-4">{quizzes.title}</h2>
-              <p className="text-gray-600 mb-4">
-                Pass Grade: {quizzes.passGrade}
-              </p>
-              {quizzes.questions.map((question, index) => (
-                <div
-                  key={index}
-                  className="mb-4 p-4 border border-gray-200 rounded-lg"
-                >
-                  <p className="text-lg font-semibold mb-2">
-                    {question.question}
-                  </p>
-                  <div className="space-y-2 mb-4">
-                    {question.options.map((option, optionIndex) => (
-                      <div key={optionIndex} className="flex items-center">
-                        <input
-                          type="radio"
-                          name={`quiz-${quizzes._id}-question-${index}`}
-                          value={option}
-                          className="form-radio text-blue-500"
-                          onChange={() => handleAnswerChange(index, option)}
-                        />
-                        <label className="ml-2">{option}</label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              {results && (
-                <div className="mt-6 p-4 border border-gray-200 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2">Results</h3>
-                  <p className="text-gray-700">{results.message}</p>
-                  <p className="text-gray-700">
-                    Score: {results.score.toFixed(2)}%
-                  </p>
-                </div>
-              )}
-              <button
-                type="button"
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-                onClick={handleSubmit}
+          <div key={quizzes._id} className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">{quizzes.title}</h2>
+            <p className="text-gray-600 mb-4">
+              Pass Grade: {quizzes.passGrade}
+            </p>
+            {quizzes.questions.map((question, index) => (
+              <div
+                key={index}
+                className="mb-4 p-4 border border-gray-200 rounded-lg"
               >
-                Submit
-              </button>
-            </div>
-          )}
+                <p className="text-lg font-semibold mb-2">
+                  {question.question}
+                </p>
+                <div className="space-y-2 mb-4">
+                  {question.options.map((option, optionIndex) => (
+                    <div key={optionIndex} className="flex items-center">
+                      <input
+                        type="radio"
+                        name={`quiz-${quizzes._id}-question-${index}`}
+                        value={option}
+                        className="form-radio text-blue-500"
+                        onChange={() =>
+                          handleAnswerChange(quizzes._id, index, option)
+                        }
+                      />
+                      <label className="ml-2">{option}</label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+            {results[quizzes._id] && (
+              <div className="mt-6 p-4 border border-gray-200 rounded-lg">
+                <h3 className="text-lg font-semibold mb-2">Results</h3>
+                <p className="text-gray-700">{results[quizzes._id].message}</p>
+                <p className="text-gray-700">
+                  Score: {results[quizzes._id].score.toFixed(2)}%
+                </p>
+              </div>
+            )}
+            <button
+              type="button"
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+              onClick={() => handleSubmit(quizzes._id)}
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
