@@ -36,16 +36,26 @@ const QuizListCSS = () => {
     setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
       [quizId]: {
-        ...(prevAnswers[quizId] || {}),
-        [questionIndex]: answer,
+        ...(prevAnswers[quizId] || {}), // Ini mempertahankan jawaban sebelumnya
+        [questionIndex]: answer, // Set jawaban baru untuk pertanyaan yang dipilih
       },
     }));
+
+    // Debugging untuk melihat apakah jawaban sudah tersimpan
+    console.log("Updated userAnswers:", {
+      ...userAnswers,
+      [quizId]: {
+        ...(userAnswers[quizId] || {}),
+        [questionIndex]: answer,
+      },
+    });
   };
 
   const handleSubmit = async (quizId) => {
     try {
       const answersForQuiz = userAnswers[quizId] || {};
 
+      // Format jawaban sebagai array
       const formattedAnswers = Object.entries(answersForQuiz).map(
         ([questionIndex, answer]) => ({
           questionIndex: parseInt(questionIndex),
@@ -94,7 +104,7 @@ const QuizListCSS = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-cover bg-no-repeat bg-primary w-full h-full p-6">
       <div className="max-w-4xl w-full bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold mb-6 text-center">All CSS Quizzes</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">All Quizzes</h1>
         <form>
           <div key={quizzes._id} className="mb-6">
             <h2 className="text-xl font-semibold mb-4">{quizzes.title}</h2>
