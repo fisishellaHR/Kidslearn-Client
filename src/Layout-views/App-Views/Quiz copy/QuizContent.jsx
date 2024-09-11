@@ -22,7 +22,6 @@ const itemVariants = {
 
 export default function QuizContentAfter() {
   const [quizzes, setQuizzes] = useState([]);
-  // const { quizId } = useParams(); // Ambil quizId dari URL
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -32,18 +31,11 @@ export default function QuizContentAfter() {
           `https://kidslearn-server.vercel.app/api/questions/html/one/quiz`
         );
         const htmlData = await htmlResponse.json();
-        // setQuizzes(htmlData);
-        // Fetch data untuk CSS
         const cssResponse = await fetch(
           `https://kidslearn-server.vercel.app/api/questions/css/one/quiz`
         );
         const cssData = await cssResponse.json();
-        // setQuizzes(cssData);
-        // Gabungkan data HTML dan CSS
-        // const allData = [htmlData, cssData]
-        // setQuizzes(allData);
         setQuizzes((prevQuizzes) => [...prevQuizzes, htmlData, cssData]);
-        
       } catch (error) {
         console.error("Error fetching quizzes:", error);
       }
