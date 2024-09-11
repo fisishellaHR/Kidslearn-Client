@@ -10,6 +10,7 @@ const NilaiPengguna = () => {
         const response = await axios.get(
           "https://kidslearn-server.vercel.app/api/auth/getUsers"
         );
+        console.log("Fetched users data:", response.data); // Debugging
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -40,12 +41,19 @@ const NilaiPengguna = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-base text-white">
                 <ul>
-                  {/* {user.quiz.map((quizItem) => ( */}
-                  <li className="flex">
-                    <p className="px-2">Percobaan Ke</p>
-                    {user.experiment} | {user.title} : {user.score}
-                  </li>
-                  {/* ))} */}
+                  {/* Pastikan user.quiz adalah array sebelum dilakukan mapping */}
+                  {Array.isArray(user.quiz) ? (
+                    user.quiz.map((quizItem, index) => (
+                      <li key={index} className="flex">
+                        <p className="px-2">
+                          Percobaan Ke {quizItem.experiment || "N/A"}
+                        </p>
+                        | {quizItem.title || "N/A"} : {quizItem.score || "N/A"}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Tidak ada data kuis untuk pengguna ini</li>
+                  )}
                 </ul>
               </td>
             </tr>
