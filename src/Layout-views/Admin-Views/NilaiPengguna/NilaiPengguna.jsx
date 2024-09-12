@@ -34,13 +34,14 @@ const NilaiPengguna = () => {
         </thead>
         <tbody className="bg-secondary divide-y divide-primary">
           {users.map((user) => (
-            <tr key={user.userId}>
+            <tr key={user._id}>
               <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                {user.userName}
+                {user.username}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-base text-white">
                 <ul>
-                  {user.historyAnswer && user.historyAnswer.length > 0 ? (
+                  {Array.isArray(user.historyAnswer) &&
+                  user.historyAnswer.length > 0 ? (
                     user.historyAnswer.map((answerItem, index) => (
                       <li key={index} className="flex">
                         <p className="px-2">
