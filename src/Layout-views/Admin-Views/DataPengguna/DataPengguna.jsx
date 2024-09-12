@@ -112,13 +112,13 @@ const DataPengguna = () => {
           <div>
             <h2 className="text-xl font-bold">Detail User</h2>
             <p>
-              <strong>ID:</strong> {selectedUser.userId}
+              <strong>ID:</strong> {selectedUser._id}
             </p>
             <p>
               <strong>Username:</strong> {selectedUser.username}
             </p>
             <p>
-              <strong>Email:</strong> {selectedUser.userEmail}
+              <strong>Email:</strong> {selectedUser.email}
             </p>
             <button
               className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
