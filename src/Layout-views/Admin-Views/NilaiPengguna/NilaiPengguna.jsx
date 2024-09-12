@@ -43,9 +43,9 @@ const NilaiPengguna = () => {
                   {user.historyAnswer && user.historyAnswer.length > 0 ? (
                     user.historyAnswer.map((answerItem, index) => (
                       <li key={index} className="flex">
-                        <p className="px-2">Percobaan Ke {answerItem.score}</p>
+                        <p className="px-2">Percobaan Ke {user.score}</p>
                         {user.title
-                          ? `${user.title} : ${answerItem.answer}`
+                          ? `${user.title} : ${user.score}`
                           : "No Title"}
                       </li>
                     ))
