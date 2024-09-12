@@ -33,33 +33,41 @@ const NilaiPengguna = () => {
           </tr>
         </thead>
         <tbody className="bg-secondary divide-y divide-primary">
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                {user.username}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-base text-white">
-                <ul>
-                  {Array.isArray(user.historyAnswer) &&
-                  user.historyAnswer.length > 0 ? (
-                    user.historyAnswer.map((answerItem, index) => (
-                      <li key={index} className="flex">
-                        <p className="px-2">
-                          {answerItem.title
-                            ? `${answerItem.title} Percobaan ke ${
-                                index + 1
-                              } : ${answerItem.score}`
-                            : "No Title"}
-                        </p>
-                      </li>
-                    ))
-                  ) : (
-                    <li>Tidak ada data jawaban</li>
-                  )}
-                </ul>
+          {users.length > 0 ? (
+            users.map((user) => (
+              <tr key={user.userId}>
+                <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
+                  {user.userName}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-base text-white">
+                  <ul>
+                    {Array.isArray(user.historyAnswer) &&
+                    user.historyAnswer.length > 0 ? (
+                      user.historyAnswer.map((answerItem, index) => (
+                        <li key={index} className="flex">
+                          <p className="px-2">
+                            {user.title
+                              ? `${user.title} Percobaan ke ${index + 1} : ${
+                                  user.score
+                                }`
+                              : "No Title"}
+                          </p>
+                        </li>
+                      ))
+                    ) : (
+                      <li>Tidak ada data jawaban</li>
+                    )}
+                  </ul>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="2" className="text-center text-white">
+                Tidak ada data
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
