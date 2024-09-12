@@ -39,7 +39,7 @@ const DataPengguna = () => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-server.vercel.app/api/auth/getUsers"
+        "https://kidslearn-server.vercel.app/api/auth/listScores"
       );
       setUsers(response.data);
     } catch (error) {

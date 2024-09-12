@@ -9,7 +9,7 @@ const NilaiPengguna = () => {
     const getUsers = async () => {
       try {
         const response = await axios.get(
-          "https://kidslearn-server.vercel.app/api/auth/getUsers"
+          "https://kidslearn-server.vercel.app/api/auth/listScores"
         );
 
         // Mengelompokkan data berdasarkan userId

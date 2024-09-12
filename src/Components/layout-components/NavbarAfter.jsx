@@ -20,7 +20,7 @@ const NavbarAfter = () => {
   const fetchUserId = async (username) => {
     try {
       const response = await axios.get(
-        `httpp::/127.0.0.1:3000/api/auth/getUserByUsername?username=${username}`
+        `httpp::/127.0.0.1:3000/api/authhttps://kidslearn-server.vercel.appByUsername?username=${username}`
       );
       console.log(response.data);
     } catch (error) {
