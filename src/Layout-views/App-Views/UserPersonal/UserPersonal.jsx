@@ -6,13 +6,10 @@ import { useEffect, useState } from "react";
 
 const UserPersonal = () => {
   const navigate = useNavigate();
-
-  // const { userId } = useParams();
   const { username } = useParams();
   const [newNama, SetNewNama] = useState("");
-
   const [user, setUser] = useState({});
-  const [email, setEmail] = useState({});
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (username) {
@@ -23,7 +20,6 @@ const UserPersonal = () => {
   const fetchUser = async () => {
     try {
       const response = await axios.get(
-        // `https://kidslearn-server.vercel.app/api/auth/getUserByUsername?username=${username}`,
         `https://kidslearn-server.vercel.app/api/auth/getUserByUsername?username=${username}`
       );
       setUser(response.data);
@@ -39,7 +35,6 @@ const UserPersonal = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        // `https://kidslearn-server.vercel.app/api/auth/updateUser`,
         `https://kidslearn-server.vercel.app/api/auth/updateUser`,
         {
           id: user._id,
@@ -48,12 +43,13 @@ const UserPersonal = () => {
       );
       localStorage.setItem("username", newNama);
       fetchUser();
-      alert("username telah di ubah");
+      alert("Username telah diubah");
       navigate("/homepageafter");
     } catch (error) {
-      alert("Username Tidak Berubah");
+      alert("Username tidak berubah");
     }
   };
+
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
@@ -133,7 +129,7 @@ const UserPersonal = () => {
         </form>
         <br />
       </div>
-      <div className="text-center font-bowlby mt-10 text-3xl ">
+      <div className="text-center font-bowlby mt-10 text-3xl">
         <h1>Hasil Nilai Quiz</h1>
       </div>
       <div className="container p-5 mt-10 grid grid-cols-4 justify-items-center gap-x-3 border-4 border-black rounded-lg">
@@ -141,14 +137,13 @@ const UserPersonal = () => {
           <h1 className="px-2 font-bowlby mb-2">{user.quiz}</h1>
           <div className="px-2 py-2 rounded-full border-4 border-black font w-16 mx-auto mb-2">
             <p className="font-bold">Score</p>
-            <p>{user.score}</p>{" "}
+            <p>{user.score}</p>
           </div>
           <div className="flex justify-center">
             <p className="px-2 font-poppins">Percobaan</p>
-            <p>{user.experiment}</p>{" "}
+            <p>{user.experiment}</p>
           </div>
         </div>
-        {/* ))} */}
       </div>
     </section>
   );
