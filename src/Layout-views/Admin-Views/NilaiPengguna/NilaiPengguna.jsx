@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -33,16 +34,31 @@ const NilaiPengguna = () => {
             };
           }
 
-          acc[userId].quizzes.push({
-            title: title || "No Title",
-            passGrade: passGrade || "No PassGrade",
-            historyAnswer: historyAnswer.map((quizItem) => ({
-              questionId: quizItem.questionId,
-              answer: quizItem.answer,
-            })),
-            experiment,
-            score,
-          });
+          // Update existing quizzes or add new ones
+          const existingQuizIndex = acc[userId].quizzes.findIndex(
+            (quiz) => quiz.title === title && quiz.experiment === experiment
+          );
+
+          if (existingQuizIndex > -1) {
+            // Update existing quiz only score and experiment
+            acc[userId].quizzes[existingQuizIndex] = {
+              ...acc[userId].quizzes[existingQuizIndex],
+              score,
+              experiment,
+            };
+          } else {
+            // Add new quiz
+            acc[userId].quizzes.push({
+              title: title || "No Title",
+              passGrade: passGrade || "No PassGrade",
+              historyAnswer: historyAnswer.map((quizItem) => ({
+                questionId: quizItem.questionId,
+                answer: quizItem.answer,
+              })),
+              experiment,
+              score,
+            });
+          }
 
           return acc;
         }, {});
@@ -88,11 +104,14 @@ const NilaiPengguna = () => {
                   <ul>
                     {user.quizzes.length > 0 ? (
                       user.quizzes.map((quiz, index) => (
-                        <li key={index} className="flex">
+                        <li
+                          key={`${user.userId}-${quiz.title}-${quiz.experiment}`}
+                          className="flex"
+                        >
                           <p className="px-2">
-                            {quiz.title
+                            {quiz.title !== "No Title"
                               ? `${quiz.title} Percobaan ke ${quiz.experiment} : ${quiz.score}`
-                              : "No Title"}
+                              : `No Title Percobaan ke ${quiz.experiment} : ${quiz.score}`}
                           </p>
                         </li>
                       ))
