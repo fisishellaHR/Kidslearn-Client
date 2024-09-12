@@ -10,7 +10,12 @@ const NilaiPengguna = () => {
         const response = await axios.get(
           "https://kidslearn-server.vercel.app/api/auth/getUsers"
         );
-        setUsers(response.data);
+        const uniqueUsers = Array.from(
+          new Set(response.data.map((user) => user.userId))
+        ).map((userId) => {
+          return response.data.find((user) => user.userId === userId);
+        });
+        setUsers(uniqueUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
