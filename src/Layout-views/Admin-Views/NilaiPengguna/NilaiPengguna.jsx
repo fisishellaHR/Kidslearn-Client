@@ -40,14 +40,20 @@ const NilaiPengguna = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-base text-white">
                 <ul>
-                  {user.historyAnswer.map((answerItem, index) => (
-                    <li key={index} className="flex">
-                      <p className="px-2">
-                        Percobaan Ke {answerItem.experiment}
-                      </p>
-                      {user.title} : {answerItem.answer}
-                    </li>
-                  ))}
+                  {user.historyAnswer && user.historyAnswer.length > 0 ? (
+                    user.historyAnswer.map((answerItem, index) => (
+                      <li key={index} className="flex">
+                        <p className="px-2">
+                          Percobaan Ke {answerItem.experiment}
+                        </p>
+                        {user.title
+                          ? `${user.title} : ${answerItem.answer}`
+                          : "No Title"}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Tidak ada data jawaban</li>
+                  )}
                 </ul>
               </td>
             </tr>
