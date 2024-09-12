@@ -6,21 +6,21 @@ export const FeedBack = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const response = await axios.get(
+          "https://kidslearn-server.vercel.app/api/auth/getUsers"
+        );
+        setUsers(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getUsers();
-    console.log(users);
   }, []);
 
-  const getUsers = async () => {
-    try {
-      const response = await axios.get(
-        "https://kidslearn-server.vercel.app/api/auth/getUsers"
-      );
-      setUsers(response.data);
-      console.log(users);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log(users); // Cek data di sini, setelah data berhasil diambil
 
   return (
     <div className="overflow-auto bg-primary shadow-md rounded-lg p-6">
@@ -36,27 +36,37 @@ export const FeedBack = () => {
           </tr>
         </thead>
         <tbody className="bg-secondary divide-y divide-primary">
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                {user.username}
-              </td>
-              <td>
-                <ul>
-                  {user.suggestions.map((suggestion) => (
-                    <td
-                      key={suggestion._id}
-                      className="flex justify-start  whitespace-nowrap text-base text-white  border-primary"
-                    >
-                      <ol>
-                        <li>{suggestion.suggestion}</li>
-                      </ol>
-                    </td>
-                  ))}
-                </ul>
+          {users.length > 0 ? (
+            users.map((user) => (
+              <tr key={user._id}>
+                <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
+                  {user.username}
+                </td>
+                <td>
+                  <ul>
+                    {user.suggestions.length > 0 ? (
+                      user.suggestions.map((suggestion) => (
+                        <li
+                          key={suggestion._id}
+                          className="flex justify-start whitespace-nowrap text-base text-white border-primary"
+                        >
+                          {suggestion.suggestion}
+                        </li>
+                      ))
+                    ) : (
+                      <li>Tidak ada masukan</li>
+                    )}
+                  </ul>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="2" className="text-center text-white">
+                Tidak ada data
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
