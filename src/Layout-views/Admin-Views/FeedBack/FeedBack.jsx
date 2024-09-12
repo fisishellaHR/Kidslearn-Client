@@ -12,7 +12,7 @@ export const FeedBack = () => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "https://kidslearn-server.vercel.app/api/auth/getUser"
+        "https://kidslearn-server.vercel.app/api/auth/getAllUsers"
       );
       setUsers(response.data);
     } catch (error) {
