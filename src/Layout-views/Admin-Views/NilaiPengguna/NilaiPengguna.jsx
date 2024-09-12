@@ -44,7 +44,7 @@ const NilaiPengguna = () => {
                     {Array.isArray(user.historyAnswer) &&
                     user.historyAnswer.length > 0 ? (
                       user.historyAnswer.map((answerItem, index) => (
-                        <li key={index} className="flex">
+                        <li key={index + 1} className="flex">
                           <p className="px-2">
                             {user.title
                               ? `${user.title} Percobaan ke ${index + 1} : ${
