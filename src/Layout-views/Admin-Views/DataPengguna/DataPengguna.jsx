@@ -79,7 +79,7 @@ const DataPengguna = () => {
             return (
               <tr key={user.userId}>
                 <td className="px-6 py-4 whitespace-nowrap text-base text-white border-r border-primary">
-                  {user.userName}
+                  {user.username}
                 </td>
 
                 <td className="px-1 py-2 whitespace-nowrap text-base text-white border-r border-primary text-center">
@@ -115,7 +115,7 @@ const DataPengguna = () => {
               <strong>ID:</strong> {selectedUser.userId}
             </p>
             <p>
-              <strong>Username:</strong> {selectedUser.userName}
+              <strong>Username:</strong> {selectedUser.username}
             </p>
             <p>
               <strong>Email:</strong> {selectedUser.userEmail}
