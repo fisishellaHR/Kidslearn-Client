@@ -6,21 +6,19 @@ export const FeedBack = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const response = await axios.get(
-          "https://kidslearn-server.vercel.app/api/auth/getUsers"
-        );
-        setUsers(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     getUsers();
   }, []);
 
-  console.log(users); // Cek data di sini, setelah data berhasil diambil
+  const getUsers = async () => {
+    try {
+      const response = await axios.get(
+        "https://kidslearn-server.vercel.app/api/auth/getUsers"
+      );
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
   return (
     <div className="overflow-auto bg-primary shadow-md rounded-lg p-6">
@@ -44,7 +42,8 @@ export const FeedBack = () => {
                 </td>
                 <td>
                   <ul>
-                    {user.suggestions.length > 0 ? (
+                    {Array.isArray(user.suggestions) &&
+                    user.suggestions.length > 0 ? (
                       user.suggestions.map((suggestion) => (
                         <li
                           key={suggestion._id}
